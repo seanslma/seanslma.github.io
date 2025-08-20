@@ -4,7 +4,7 @@ description: "Sean's Stories" # This will show up in places like twitter, linked
 
 # Email / Social media user names used by the minima theme:
 # All of these are optional and can be removed or commented out
-email: "sean.ln.xin@gmail.com"
+email: "sean.sl.ma_at_gmail.com"
 twitter_username: "sean_lma"
 github_username: "seanslma"
 linkedin_username: "seanslma"
@@ -22,9 +22,12 @@ theme: "minima"
 
 rss: rss
 
+markdown: kramdown
+highlighter: rouge
+
 kramdown:
-  syntax_highlighter_opts:
-    disable: true
+  input: GFM
+  syntax_highlighter: rouge
 
 plugins:
   - jekyll-feed
@@ -39,4 +42,4 @@ defaults:
       path: ""
       type: post
     values:
-      tags: Other
+      tags: ["Other"]

@@ -1,3 +1,7 @@
+---
+tags: [Python, Feature Selection]
+---
+
 ## Improve `VarianceThreshold` performance in feature selection
 
 ### sk-learn implementation slow
