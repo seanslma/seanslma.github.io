@@ -1,11 +1,11 @@
 ---
-tags: [Python, Feature Selection]
+tags: ["Python", "Feature Selection"]
 ---
 
-## Improve `VarianceThreshold` performance in feature selection
+## Improve VarianceThreshold performance in ML feature selection
 
 ### sk-learn implementation slow
-```py
+```python
 import polars as pl
 sklearn.feature_selection import VarianceThreshold
 def sklearn_variance_threshold(
@@ -20,7 +20,7 @@ def sklearn_variance_threshold(
 
 ### polars implementation is much faster
 about 20x faster
-```py
+```python
 import polars as pl
 def polars_variance_threshold(
     X: pl.DataFrame,
@@ -38,7 +38,7 @@ def polars_variance_threshold(
 ```
 
 ### Test it
-```py
+```python
 import pandas as pd
 import polars as pl
 # create dataset
