@@ -38,7 +38,7 @@ def polars_variance_threshold(
 ```
 
 ### Test it
-```python
+```py
 import pandas as pd
 import polars as pl
 # create dataset

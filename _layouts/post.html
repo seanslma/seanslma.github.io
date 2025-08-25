@@ -1,9 +1,17 @@
 ---
-layout: default
+layout: none
 ---
-<link href="/css/override.css" rel="stylesheet" type="text/css">
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/override.css' | relative_url }}">
+</head>
+<body>
 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
@@ -13,8 +21,11 @@ layout: default
       </time>
       {% assign author = page.author | default: site.author %}
       {%- if author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ author }}</span></span>
-      {%- endif -%}</p>
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ author }}</span>
+        </span>
+      {%- endif -%}
+    </p>
   </header>
 
   <div class="share-links">
@@ -28,3 +39,6 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+
+</body>
+</html>
