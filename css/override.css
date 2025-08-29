@@ -4,14 +4,14 @@ hr {
 }
 
 body {
-  font-size: 14px;
+  font-size: 16px;
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.1;
+  line-height: 1.5;
 }
 
 .post-content {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
