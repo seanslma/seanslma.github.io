@@ -1,7 +1,29 @@
-<header>
+<!-- <header>
     <h1>{{ site.title }}</h1>
     <nav>
-      <a href="{{ site.baseurl }}/">Home</a>
-      <a href="{{ site.baseurl }}/archive.html">Blog Archive</a>
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/archive.html">Archives</a>
+        <a href="{{ site.baseurl }}/category.html">Categories</a>
+        <a href="{{ site.baseurl }}/about.html">About</a>
     </nav>
-  </header>
+</header> -->
+
+<header class="mb-8">
+    <h1>{{ site.title }}</h1>
+    <nav class="flex items-center justify-between py-4">
+        <a href="{{ site.baseurl }}/" class="text-3xl font-bold tracking-tight text-gray-900">
+            Home
+        </a>
+        <div class="flex space-x-4">
+        <a href="{{ site.baseurl }}/archive.html" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">
+            Archives
+        </a>
+        <a href="{{ site.baseurl }}/category.html" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">
+            Categories
+        </a>
+        <a href="{{ site.baseurl }}/about.html" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200">
+            About
+        </a>
+        </div>
+    </nav>
+</header>
