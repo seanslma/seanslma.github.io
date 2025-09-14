@@ -17,7 +17,8 @@ For example when you using `LaztFrame.columns` you will get a warning:
 ```
 PerformanceWarning: Determining the column names of a LazyFrame requires
 resolving its schema, which is a potentially expensive operation.
-Use `LazyFrame.collect_schema().names()` to get the column names without this warning.
+Use `LazyFrame.collect_schema().names()` to get the column names without
+this warning.
   d.lazy().columns
 ```
 However, if you take the suggestion of the warning by using the alternative method you will only avoid the warning but nothing else -- the alternative operation is still expensive.
@@ -25,9 +26,9 @@ However, if you take the suggestion of the warning by using the alternative meth
 Let's test it by code example:
 ```py
 import polars as pl
-d = {f'v{i}':[i] for i in range(10000)}
-dxx = pl.DataFrame(d)
-dyy = dxx.lazy()
+da = {f'v{i}':[i] for i in range(10000)}
+df = pl.DataFrame(da)
+lf = df.lazy()
 
 _ = df.columns                  # 1.39 ms ± 45 μs without warning
 _ = lf.columns                  # 25.3 ms ± 822 μs with warning
