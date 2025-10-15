@@ -1,5 +1,0 @@
-// Restrict GitHub code theme only to fenced blocks
-.post-content pre,
-.post-content code {
-  @import "syntax-github";  // this is your github.css
-}

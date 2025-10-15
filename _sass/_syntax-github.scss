@@ -1,0 +1,139 @@
+// GitHub-style code highlighting for Jekyll (Rouge)
+// Compatible with Minima theme
+// --------------------------------------------------
+
+.highlight {
+  background: #f6f8fa;
+  border-radius: 6px;
+  padding: 0.5em 0.5em; // slightly reduced padding
+  overflow-x: auto;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: #24292e;
+  position: relative; // required for positioning the copy button
+
+  pre {
+    margin: 0;
+    background: transparent;
+  }
+
+  code {
+    background: transparent;
+    padding: 0;
+  }
+
+  // Comments
+  .c, .cm, .c1, .cs {
+    color: #6a737d;
+    font-style: italic;
+  }
+
+  // Keywords
+  .k, .kd, .kn, .kp, .kr, .kt, .kc {
+    color: #d73a49;
+    font-weight: 600;
+  }
+
+  // Strings
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss {
+    color: #032f62;
+  }
+
+  // Numbers
+  .m, .mb, .mf, .mh, .mi, .il, .mo {
+    color: #005cc5;
+  }
+
+  // Functions / Names
+  .nf, .nn, .nc, .no, .nv {
+    color: #6f42c1;
+  }
+
+  // Attributes
+  .na {
+    color: #005cc5;
+  }
+
+  // Tags
+  .nt {
+    color: #22863a;
+  }
+
+  // Operators
+  .o, .ow {
+    color: #d73a49;
+  }
+
+  // Punctuation
+  .p {
+    color: #24292e;
+  }
+
+  // Constants / Special
+  .bp, .vc, .vg, .vi {
+    color: #e36209;
+  }
+
+  // Built-in or library calls
+  .nb {
+    color: #005cc5;
+  }
+
+  // Emphasis / strong
+  .ge {
+    font-style: italic;
+  }
+
+  .gs {
+    font-weight: bold;
+  }
+
+  // Diff highlighting
+  .gd {
+    background-color: #ffeef0;
+    color: #b31d28;
+  }
+
+  .gi {
+    background-color: #e6ffed;
+    color: #22863a;
+  }
+
+  // Inline code (within paragraphs)
+  code.highlighter-rouge {
+    background: rgba(27, 31, 35, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+}
+
+// ---------------------------------------------
+// Add Copy Button styling
+// ---------------------------------------------
+.copy-button {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  color: #fff;
+  background: #0366d6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  background: #005cc5;
+}
+
+// Optional: tighter margins for code blocks globally
+pre.highlight {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}

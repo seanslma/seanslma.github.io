@@ -1,4 +1,5 @@
 ---
+layout: post
 tags: ["Python", "Feature Selection"]
 ---
 
@@ -7,7 +8,7 @@ For Machine Learning feature selection, one of the basic and efficient methods i
 
 ## scikit-learn implementation is slow
 The `VarianceThreshold` class implemented in `sciki-learn` is super slow. Here is the example showing how to use it.
-```py
+```python
 import polars as pl
 from sklearn.feature_selection import VarianceThreshold
 def sklearn_variance_threshold(
@@ -24,7 +25,7 @@ def sklearn_variance_threshold(
 The `polars` is a `pandas` equivalent data processing package that is implemented using the `Rust` language. Note that `Rust` is popular for its performance and other great features such as parallelization and memory management.
 
 Here is the implementation using `polars` that is about 20x faster.
-```py
+```python
 import polars as pl
 def polars_variance_threshold(
     X: pl.DataFrame,
@@ -43,7 +44,7 @@ def polars_variance_threshold(
 
 ## Test it
 To compare the performance of the two different implementations we can again use the method I created to generate dummy data for testing.
-```py
+```python
 import pandas as pd
 import polars as pl
 # create dataset

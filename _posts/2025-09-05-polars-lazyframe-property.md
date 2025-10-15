@@ -1,4 +1,5 @@
 ---
+layout: post
 tags: ["Python", "Polars"]
 ---
 
@@ -13,7 +14,7 @@ Here is a list of the some properties for the LazyFrame:
 - LazyFrame.schema
 - LazyFrame.width
 
-For example when you using `LaztFrame.columns` you will get a warning:
+For example when you using `LazyFrame.columns` you will get a warning:
 ```
 PerformanceWarning: Determining the column names of a LazyFrame requires
 resolving its schema, which is a potentially expensive operation.
@@ -24,7 +25,7 @@ this warning.
 However, if you take the suggestion of the warning by using the alternative method you will only avoid the warning but nothing else -- the alternative operation is still expensive.
 
 Let's test it by code example:
-```py
+```python
 import polars as pl
 da = {f'v{i}':[i] for i in range(10000)}
 df = pl.DataFrame(da)

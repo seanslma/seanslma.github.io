@@ -22,6 +22,10 @@ theme: "minima"
 
 rss: rss
 
+sass:
+  sass_dir: _sass
+  # style: compressed
+
 markdown: kramdown
 highlighter: rouge
 
@@ -30,10 +34,15 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: "highlight"
+    # language_aliases:
+    #   py: python
+    #   rs: rust
+    #   js: javascript
+    #   sh: bash
 
-rawposts:
-  highlighter: rouge
-  syntax: github   # <--- change this to github
+# rawposts:
+#   highlighter: rouge
+#   syntax: github   # <--- change this to github
 
 plugins:
   - jekyll-feed
@@ -43,9 +52,15 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+header_pages:
+  - index.md
+  - archive.md
+  - category.md
+  - about.md
+
 defaults:
   - scope:
       path: ""
-      type: post
+      type: posts
     values:
       tags: ["Other"]
