@@ -265,7 +265,7 @@
   .post-title,
   .post-content h1 {
     margin-bottom: 10px;
-    @include relative-font-size(2.125);
+    @include relative-font-size(2.25);
     font-weight: $base-font-weight * 1.25;
     letter-spacing: -1px;
     line-height: 1.15;
@@ -467,14 +467,14 @@
   // Code copy button
   .copy-button {
     position: absolute;
-    top: 6px;
-    right: 8px;
-    padding: 3px 8px;
-    font-size: 0.75rem;
-    color: #fff;
-    background: #0366d6;
+    top: 3px;
+    right: 5px;
+    padding: 2px 5px;
+    font-size: 0.6rem;
+    color: #817777; //#4a90e2;
+    background: #f5f6f7; //#9ab6d6; //#4a90e2; //#0366d6;
     border: none;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.2s ease;

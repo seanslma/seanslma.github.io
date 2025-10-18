@@ -1,0 +1,20 @@
+.post-content h2 {
+    @include relative-font-size(1.75);
+    font-weight: 600;
+  }
+
+// Inline code inside headings (h1–h6)
+.post-content h1 code,
+.post-content h2 code,
+.post-content h3 code,
+.post-content h4 code,
+.post-content h5 code,
+.post-content h6 code {
+  font-size: 0.9em;        // slightly smaller than surrounding text
+  font-weight: inherit;    // same weight as heading
+  background: rgba(27, 31, 35, 0.05);
+  padding: 0.1em 0.15em;
+  border-radius: 3px;
+  color: inherit;          // keep same text color as heading
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}

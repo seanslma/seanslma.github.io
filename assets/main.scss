@@ -82,5 +82,6 @@ $grey-color-dark:  darken($grey-color, 25%);
 @import
   "base",               // Defines element resets.
   "layout",             // Defines structure and style based on CSS selectors.
-  "syntax-github" // Defines code syntax highlighting style
+  "syntax-jupyterlab",  // Defines code syntax highlighting style
+  "overwrites"          // Defines some custom rules, overwriting some default styles
 ;

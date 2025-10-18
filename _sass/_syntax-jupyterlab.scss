@@ -1,0 +1,146 @@
+/* ==========================================================================
+   JupyterLab-style Syntax Highlighting for Rouge
+   Compatible with Minima / Jekyll
+   ========================================================================== */
+
+   .highlight {
+    background: #f8f9fa; // soft light background
+    border-radius: 6px;
+    padding: 0.5em 0.5em; // slightly reduced padding
+    overflow-x: auto;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #212121; /* default text color */
+
+    pre {
+      margin: 0;
+      background: transparent;
+    }
+
+    code {
+      background: transparent;
+      padding: 0;
+    }
+
+    /* Comments */
+    .c, .cm, .c1, .cs {
+      color: #408080;  /* jp-mirror-editor-comment-color */
+      font-style: italic;
+    }
+
+    /* Keywords */
+    .k, .kd, .kn, .kp, .kr, .kt, .kc {
+      color: #008000; /* jp-mirror-editor-keyword-color */
+      font-weight: 600;
+    }
+
+    /* Atoms (booleans, null, etc.) */
+    .kc, .mi, .mf {
+      color: #88f; /* jp-mirror-editor-atom-color */
+    }
+
+    /* Numbers */
+    .m, .mb, .mf, .mh, .mi, .il, .mo {
+      color: #080; /* jp-mirror-editor-number-color */
+    }
+
+    /* Functions, class names, defs */
+    .nf, .nn, .nc, .no, .nd {
+      color: #00f; /* jp-mirror-editor-def-color */
+    }
+
+    /* Variables */
+    .n, .nv, .vc, .vg {
+      color: #212121; /* jp-mirror-editor-variable-color */
+    }
+
+    /* Instance variables, parameters, builtins */
+    .na {
+      color: #05a; /* jp-mirror-editor-property-color */
+    }
+
+    .nb {
+      color: #008000; /* jp-mirror-editor-builtin-color */
+    }
+
+    .bp {
+      color: rgb(0, 54, 109); /* jp-mirror-editor-variable-2-color */
+    }
+
+    .vi {
+      color: #085; /* jp-mirror-editor-variable-3-color */
+    }
+
+    /* Strings */
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss {
+      color: #ba2121; /* jp-mirror-editor-string-color */
+    }
+
+    /* Secondary strings or regexes */
+    .sr, .si {
+      color: #708; /* jp-mirror-editor-string-2-color */
+    }
+
+    /* Operators */
+    .o, .ow {
+      color: #7800c2; /* jp-mirror-editor-operator-color */
+    }
+
+    /* Punctuation and brackets */
+    .p {
+      color: #05a; /* jp-mirror-editor-punctuation-color */
+    }
+
+    /* Tags (HTML/XML) */
+    .nt {
+      color: #170; /* jp-mirror-editor-tag-color */
+    }
+
+    /* Attributes (HTML/XML) */
+    .na {
+      color: #00c; /* jp-mirror-editor-attribute-color */
+    }
+
+    /* Error */
+    .err {
+      color: #f00; /* jp-mirror-editor-error-color */
+      background: #ffeef0;
+    }
+
+    /* Headings (Markdown, etc.) */
+    .gh {
+      color: blue; /* jp-mirror-editor-header-color */
+      font-weight: bold;
+    }
+
+    /* Links */
+    .go, .gp {
+      color: #00c; /* jp-mirror-editor-link-color */
+      text-decoration: underline;
+    }
+
+    /* Quoted text */
+    .gq {
+      color: #090; /* jp-mirror-editor-quote-color */
+    }
+
+    /* Diff highlighting */
+    .gd {
+      background-color: #ffeef0;
+      color: #b31d28;
+    }
+
+    .gi {
+      background-color: #e6ffed;
+      color: #22863a;
+    }
+
+    /* Inline code (within paragraphs) */
+    code.highlighter-rouge {
+      background: rgba(27, 31, 35, 0.05);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+  }
