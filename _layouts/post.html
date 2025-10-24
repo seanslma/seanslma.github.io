@@ -53,4 +53,19 @@ layout: base
   {% endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+
+   <!-- Page View Counter -->
+   <script>
+    // Fetch current page count from Counter.dev API
+    fetch(`https://counter.dev/track?json=1&href=${encodeURIComponent(window.location.href)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.views !== undefined) {
+          document.getElementById('counterdev_pageviews').textContent = data.views;
+        }
+      })
+      .catch(() => {
+        document.getElementById('counterdev_pageviews').textContent = '–';
+      });
+  </script>
 </article>

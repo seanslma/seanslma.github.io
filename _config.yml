@@ -64,3 +64,5 @@ defaults:
       type: posts
     values:
       tags: ["Other"]
+
+counter_analytics: true

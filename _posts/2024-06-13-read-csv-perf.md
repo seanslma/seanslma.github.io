@@ -122,11 +122,13 @@ The following options are tested:
       file, engine='pyarrow', dtype_backend='numpy_nullable',
       parse_dates=['c1','c2','c3'],
   )
+  ```
 - pyarrow + pyarrow + dtype
   ```py
   pd.read_csv(
       file, engine='pyarrow', dtype_backend='pyarrow', dtype=dtype
   )
+  ```
 - pyarrow + pyarrow + string[pyarrow]
   ```py
   pd.read_csv(
