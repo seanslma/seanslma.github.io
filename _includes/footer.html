@@ -1,115 +1,133 @@
 <style>
-  .site-footer ul {
-    list-style: none;         /* removes the dots */
-    padding: 0;
+  .site-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+
+  .footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-left,
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-left ul,
+  .footer-right ul {
+    list-style: none; /* removes the dots */
     margin: 0;
+    padding: 0;
     display: flex;
     justify-content: left;  /* left align everything horizontally */
-    gap: 16px;                /* space between items */
+    gap: 16px;  /* space between items */
   }
 
-  .site-footer li {
+  .footer-left li,
+  .footer-right li {
     display: flex;
-    align-items: center;      /* centers icon + text vertically */
+    align-items: center;
   }
 
-  .site-footer a {
+  .footer-left a,
+  .footer-right a {
     text-decoration: none;
     color: inherit;
     display: inline-flex;
-    align-items: center;      /* centers text with icon */
-    gap: 6px;                 /* small gap between icon and text */
+    align-items: center;   /* centers text with icon */
+    gap: 6px;              /* small gap between icon and text */
   }
 
-  /* Optional: add a small gap between icon and text */
-  .icon {
-    display: flex;            /* ensures SVG respects flex centering */
-    align-items: center;
-    justify-content: center;
-    line-height: 1;           /* removes baseline offset */
-    gap: 4px;
+  /* Match the header underline hover effect */
+  .footer-right a {
+    position: relative;
+    /* text-decoration: none; */
+  }
+
+  .footer-right a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.2s ease;
+  }
+
+  .footer-right a:hover::after {
+    width: 100%;
+  }
+
+  .footer-left a:hover .icon svg {
+    fill: #0366d6; /* any accent color you like */
+    transition: fill 0.2s ease;
   }
 
   .icon svg {
     width: 16px;
     height: 16px;
     fill: #828282;
-    display: block;           /* removes extra space below inline SVG */
-    transform: translateY(1px); /* tiny vertical adjustment, move to bottom */
+    display: block;    /* removes extra space below inline SVG */
+    transform: translateY(-1px);  /* tiny vertical adjustment, move to bottom */
   }
 
-  /* Example hover colors per platform (optional) */
-  /* a:hover .icon svg {
-    fill: #0366d6;
-  } */
-
-  /* a:hover .icon--github svg    { fill: #333; }
-  a:hover .icon--linkedin svg  { fill: #0077b5; }
-  a:hover .icon--twitter svg   { fill: #1da1f2; }
-  a:hover .icon--mail svg      { fill: #666; } */
+  .site-footer p {
+    text-align: left; /* align left*/
+    color: #888;
+    margin-top: 3px;
+    width: 100%;
+  }
 </style>
 
 <footer class="site-footer h-card">
   <div class="wrapper">
-    <ul>
-      <li>Contact: </li>
-      {% if site.github_username %}
-        <li><a
-            href="https://github.com/{{ site.github_username }}" target="_blank">
-            <span class="icon icon--github">{% include icon-github.svg %}</span>
-        </a></li>
-      {% endif %}
-      {% if site.linkedin_username %}
-        <li><a
-          href="https://linkedin.com/in/{{ site.linkedin_username }}">
-          <span class="icon icon--lnkedin">{% include icon-linkedin.svg %}</span>
-        </a></li>
-      {% endif %}
-      {% if site.twitter_username %}
-        <li><a
-          href="https://x.com/{{ site.x_username }}">
-          <span class="icon icon--x">{% include icon-x.svg %}</span>
-        </a></li>
-      {% endif %}
-      {% if site.email %}
-        <li><a
-          href="mailto:{{ site.email | replace: '_at_', '@' }}">
-          <span class="icon icon--email">{% include icon-email.svg %}</span>
-        </a></li>
-      {% endif %}
-    </ul>
+    <div class="footer-flex">
+      <!-- LEFT: Contact icons -->
+      <div class="footer-left">
+        <ul>
+          <li>Contact: </li>
+          {% if site.github_username %}
+            <li><a href="https://github.com/{{ site.github_username }}" target="_blank">
+              <span class="icon icon--github">{% include icon-github.svg %}</span>
+            </a></li>
+          {% endif %}
+          {% if site.linkedin_username %}
+            <li><a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">
+              <span class="icon icon--linkedin">{% include icon-linkedin.svg %}</span>
+            </a></li>
+          {% endif %}
+          {% if site.x_username %}
+            <li><a href="https://x.com/{{ site.x_username }}" target="_blank">
+              <span class="icon icon--x">{% include icon-x.svg %}</span>
+            </a></li>
+          {% endif %}
+          {% if site.email %}
+            <li><a href="mailto:{{ site.email | replace: '_at_', '@' }}">
+              <span class="icon icon--email">{% include icon-email.svg %}</span>
+            </a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- RIGHT: Navigation links -->
+      <div class="footer-right">
+        <ul>
+          {% assign default_paths = site.pages | map: "path" %}
+          {% assign page_paths = site.header_pages | default: default_paths %}
+          {% include nav-items.html paths = page_paths %}
+        </ul>
+      </div>
+    </div>
+
     <p>© 2025 {{ site.author }} - {{ site.title }}</p>
   </div>
 </footer>
-
-<!-- <link id="fa-stylesheet" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"> -->
-<!-- <footer class="site-footer h-card">
-  <data class="u-url" value="{{ '/' | relative_url }}"></data>
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-      {%- if site.author %}
-        <ul class="contact-list">
-          {% if site.author.name -%}
-            <li class="p-name">{{ site.author.name | escape }}</li>
-          {% endif -%}
-          {% if site.author.email -%}
-            <li><a class="u-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
-          {%- endif %}
-        </ul>
-      {%- endif %}
-      </div>
-      <div class="footer-col">
-        <p>{{ site.description | escape }}</p>
-      </div>
-    </div>
-
-    <div class="social-links">
-      {%- include social.html -%}
-    </div>
-
-  </div>
-
-</footer> -->
