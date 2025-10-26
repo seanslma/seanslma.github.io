@@ -35,7 +35,7 @@
     height: 16px;
     fill: #828282;
     display: block;           /* removes extra space below inline SVG */
-    transform: translateY(2px); /* tiny optical adjustment */
+    transform: translateY(1px); /* tiny vertical adjustment, move to bottom */
   }
 
   /* Example hover colors per platform (optional) */
@@ -52,24 +52,30 @@
 <footer class="site-footer h-card">
   <div class="wrapper">
     <ul>
+      <li>Contact: </li>
       {% if site.github_username %}
-        <!-- <li><a href="https://github.com/{{ site.github_username }}">GitHub</a></li> -->
-        <li>
-          <a
+        <li><a
             href="https://github.com/{{ site.github_username }}" target="_blank">
             <span class="icon icon--github">{% include icon-github.svg %}</span>
-            <span class="username">{{ site.github_username }}</span>
-          </a>
-        </li>
+        </a></li>
       {% endif %}
       {% if site.linkedin_username %}
-        <li><a href="https://linkedin.com/in/{{ site.linkedin_username }}">LinkedIn</a></li>
+        <li><a
+          href="https://linkedin.com/in/{{ site.linkedin_username }}">
+          <span class="icon icon--lnkedin">{% include icon-linkedin.svg %}</span>
+        </a></li>
       {% endif %}
       {% if site.twitter_username %}
-        <li><a href="https://twitter.com/{{ site.twitter_username }}">Twitter</a></li>
+        <li><a
+          href="https://x.com/{{ site.x_username }}">
+          <span class="icon icon--x">{% include icon-x.svg %}</span>
+        </a></li>
       {% endif %}
       {% if site.email %}
-        <li><a href="mailto:{{ site.email | replace: '_at_', '@' }}">Email</a></li>
+        <li><a
+          href="mailto:{{ site.email | replace: '_at_', '@' }}">
+          <span class="icon icon--email">{% include icon-email.svg %}</span>
+        </a></li>
       {% endif %}
     </ul>
     <p>© 2025 {{ site.author }} - {{ site.title }}</p>

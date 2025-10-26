@@ -8,7 +8,7 @@ description: "Sean's Blogs" # This will show up in places like twitter, linkedin
 # Email / Social media user names used by the minima theme:
 # All of these are optional and can be removed or commented out
 email: "sean.sl.ma_at_gmail.com"
-twitter_username: "sean_lma"
+x_username: "sean_lma"
 github_username: "seanslma"
 linkedin_username: "seanslma"
 #facebook_username: username
