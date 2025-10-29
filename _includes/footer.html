@@ -18,7 +18,7 @@
   .footer-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 16px; /* slight increase for breathing room */
   }
 
   .footer-left ul,
@@ -27,8 +27,22 @@
     margin: 0;
     padding: 0;
     display: flex;
+    /* align-items: center; */
     justify-content: left;  /* left align everything horizontally */
-    gap: 16px;  /* space between items */
+  }
+
+  /* Reasonable gap between contact icons */
+  .footer-left ul {
+    gap: 16px;
+  }
+
+  /* Larger gap between nav links */
+  .footer-right .nav-item {
+    margin-right: 0.5rem; /* matches the header spacing */
+  }
+
+  .footer-right .nav-item:last-child {
+    margin-right: 0; /* prevent extra gap at the end */
   }
 
   .footer-left li,
@@ -49,7 +63,6 @@
   /* Match the header underline hover effect */
   .footer-right a {
     position: relative;
-    /* text-decoration: none; */
   }
 
   .footer-right a::after {
@@ -67,8 +80,9 @@
     width: 100%;
   }
 
+  /* Icon hover color */
   .footer-left a:hover .icon svg {
-    fill: #0366d6; /* any accent color you like */
+    fill: #0366d6;
     transition: fill 0.2s ease;
   }
 
@@ -76,15 +90,35 @@
     width: 16px;
     height: 16px;
     fill: #828282;
-    display: block;    /* removes extra space below inline SVG */
-    transform: translateY(-1px);  /* tiny vertical adjustment, move to bottom */
+    display: block; /* removes extra space below inline SVG */
+    transform: translateY(-1px); /* tiny vertical adjustment, move to bottom */
   }
 
+  /* Copyright text always left-aligned */
   .site-footer p {
-    text-align: left; /* align left*/
+    text-align: left;
     color: #888;
-    margin-top: 3px;
+    margin-top: 6px;
     width: 100%;
+  }
+
+  /* ----- Responsive tweaks for small screens ----- */
+  @media (max-width: 700px) {
+    .footer-flex {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .footer-left ul {
+      flex-wrap: wrap;
+      gap: 10px 14px; /* reduce crowding on narrow screens */
+    }
+
+    .footer-right ul {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
   }
 </style>
 

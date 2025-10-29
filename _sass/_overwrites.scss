@@ -3,6 +3,11 @@
     font-weight: 600;
   }
 
+  .post-content h3 {
+    @include relative-font-size(1.375);
+    font-weight: 600;
+  }
+
 // Inline code inside headings (h1–h6)
 .post-content h1 code,
 .post-content h2 code,
