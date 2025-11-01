@@ -11,14 +11,14 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1rem; /* Gap is OK here for spacing between left and right columns */
   }
 
   .footer-left,
   .footer-right {
     display: flex;
     align-items: center;
-    gap: 16px; /* slight increase for breathing room */
+    gap: 16px; /* This gap is for spacing between 'Contact:' and the icon list, keep it for modern browsers */
   }
 
   .footer-left ul,
@@ -27,13 +27,22 @@
     margin: 0;
     padding: 0;
     display: flex;
-    /* align-items: center; */
-    justify-content: left;  /* left align everything horizontally */
+    justify-content: left; /* left align everything horizontally */
   }
 
-  /* Reasonable gap between contact icons */
-  .footer-left ul {
-    gap: 16px;
+  /*
+    * FIX: Replaced 'gap' with 'margin-right' for universal support (iOS 12 and below)
+    * This creates 16px space between all list items (Contact: and all icons).
+  */
+  .footer-left ul li {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+
+  /* Remove the margin from the very last item in the list */
+  .footer-left ul li:last-child {
+    margin-right: 0;
   }
 
   /* Larger gap between nav links */
@@ -45,11 +54,11 @@
     margin-right: 0; /* prevent extra gap at the end */
   }
 
-  .footer-left li,
+  /* .footer-left li,
   .footer-right li {
     display: flex;
     align-items: center;
-  }
+  } */
 
   .footer-left a,
   .footer-right a {
@@ -115,9 +124,20 @@
       gap: 10px 14px; /* reduce crowding on narrow screens */
     }
 
+    /* Mobile adjustment for social icon spacing */
+    .footer-left ul li {
+      margin-right: 14px; /* Slightly reduced margin for mobile, acts as the horizontal gap */
+      margin-bottom: 10px; /* Added margin to separate rows if the icons wrap */
+    }
+
+    /* Keep removing the margin from the last item */
+    .footer-left ul li:last-child {
+        margin-right: 0;
+    }
+
     .footer-right ul {
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 16px; /* If this fails on old iOS, use margin-right for .footer-right ul li */
     }
   }
 </style>
