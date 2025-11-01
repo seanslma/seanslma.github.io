@@ -205,7 +205,7 @@
    * Page content
    */
   .page-content {
-    padding: $spacing-unit 0 ($spacing-unit * 0.1); /* Use 10% of the spacing unit for the bottom */
+    padding: $spacing-unit 0 ($spacing-unit * 0.05); /* Use 5% of the spacing unit for the bottom */
     flex: 1 0 auto;
   }
 

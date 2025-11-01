@@ -155,7 +155,7 @@ The following options are tested:
   ```
 
 The performance results for these options are as follows:
-```
+```text scroll
                                                          str    float  datetime performance_order_for_float
 c       + numpy_nullable + dtype_str + astype            3.93s  18.2s  18.5s    10
 c       + numpy_nullable + dtype                         3.88s  3.29s  15.4s     6

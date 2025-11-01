@@ -52,7 +52,7 @@ df_result = df.with_columns(
 ```
 
 Now the output is correct:
-```py
+```
 shape: (3, 3)
 ┌──────┬──────┬───────┐
 │ x    ┆ y    ┆ v     │
