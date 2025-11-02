@@ -144,3 +144,21 @@
       font-size: 0.9em;
     }
   }
+
+/* Scrollable code blocks */
+.scroll .highlight,
+.highlight.scroll {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  display: block;
+}
+
+/* Optional: smaller font or padding for mobile */
+@media (max-width: 700px) {
+  .scroll .highlight,
+  .highlight.scroll {
+    font-size: 0.9em;
+    padding-bottom: 0.25em;
+  }
+}

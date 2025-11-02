@@ -155,7 +155,8 @@ The following options are tested:
   ```
 
 The performance results for these options are as follows:
-```text scroll
+<div class="scroll">
+```text
                                                          str    float  datetime performance_order_for_float
 c       + numpy_nullable + dtype_str + astype            3.93s  18.2s  18.5s    10
 c       + numpy_nullable + dtype                         3.88s  3.29s  15.4s     6
@@ -168,6 +169,7 @@ pyarrow + pyarrow        + dtype_pa                      0.39s  0.48s  0.44s    
 pyarrow + pyarrow        + dtype_pa + to numpy_nullable  2.74s  2.68s  1.64s     5
 pyarrow + pyarrow                                        0.48s  0.47s  0.37s     1
 ```
+</div>
 
 Based on the test results, we can conclude that:
 - We can get the best performance when using `pyarrow` for the parser, backend and dtype (`pyarrow + pyarrow + dtype_pa`).

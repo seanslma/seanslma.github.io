@@ -42,6 +42,7 @@ kramdown:
     #   rs: rust
     #   js: javascript
     #   sh: bash
+  parse_block_html: true # allow parsing of Markdown inside raw HTML blocks
 
 # rawposts:
 #   highlighter: rouge
