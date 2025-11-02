@@ -3,7 +3,7 @@ layout: post
 tags: ["Python", "CSV"]
 ---
 
-# Read CSV Files 10x to 40x Faster Using pyarrow and polars
+# Read CSV files 10x to 40x faster using pyarrow and polars
 
 CSV (comma-separated values) files have been widely used in different areas. They can be easily exported from almost all programming languages. They can also be loaded into all text editors and many other applications. However, the main disadvantage is that CSV files are usually larger than files with other formats and it is slow to load them into memory.
 
