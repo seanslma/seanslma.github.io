@@ -145,20 +145,54 @@
     }
   }
 
-/* Scrollable code blocks */
-.scroll .highlight,
-.highlight.scroll {
+// /* Scrollable code blocks */
+// .scroll,
+// .scroll .highlight,
+// .highlight.scroll {
+//   overflow-x: auto !important;
+//   -webkit-overflow-scrolling: touch;
+//   white-space: pre;
+//   display: block;
+// }
+
+// /* Optional: smaller font or padding for mobile */
+// @media (max-width: 700px) {
+//   .scroll,
+//   .scroll .highlight,
+//   .highlight.scroll {
+//     font-size: 0.9em;
+//     padding-bottom: 0.25em;
+//   }
+// }
+
+/* ==========================================================================
+   Mobile Scroll Override (Final Version)
+   ========================================================================== */
+
+/* 1. Ensure content ALIGNMENT is preserved on ALL SCREENS (including mobile).
+   This is critical and must be set on the innermost content.
+*/
+.highlight pre {
+  white-space: pre !important;
+  word-break: normal !important;
+}
+
+/* 2. ENFORCE HORIZONTAL SCROLLING for the custom .scroll wrapper on MOBILE ONLY. */
+@media (max-width: 700px) {
+/* Target the outermost wrapper where we added the 'scroll' class. */
+.scroll {
+  /* These properties force the scrollbar to appear on mobile devices */
   overflow-x: auto !important;
   -webkit-overflow-scrolling: touch;
-  white-space: pre;
+  /* Ensure the container is treated as a block */
   display: block;
 }
 
-/* Optional: smaller font or padding for mobile */
-@media (max-width: 700px) {
-  .scroll .highlight,
-  .highlight.scroll {
-    font-size: 0.9em;
-    padding-bottom: 0.25em;
-  }
+/* Optional: Smaller font/padding only on mobile */
+.scroll,
+.scroll .highlight,
+.highlight.scroll {
+  font-size: 0.9em;
+  padding-bottom: 0.25em;
+}
 }
