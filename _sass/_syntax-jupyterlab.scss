@@ -190,9 +190,15 @@
 
 /* Optional: Smaller font/padding only on mobile */
 .scroll,
+.scroll .language-text,
+.scroll .highlighter-rouge,
 .scroll .highlight,
 .highlight.scroll {
   font-size: 0.9em;
   padding-bottom: 0.25em;
+
+  overflow-x: visible; /* prevent nested clipping */
+  white-space: pre;
+  display: block;
 }
 }
