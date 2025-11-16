@@ -58,7 +58,6 @@ titles_from_headings:
 
 header_pages:
   - index.md
-  - archive.md
   - category.md
   - about.md
 
