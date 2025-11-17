@@ -15,4 +15,4 @@
 - [My rust-python examples](https://github.com/seanslma/mars)
 
 ## My publications
-My research was mainly on plasma diagnostics. A list of my publication is available [here]({{ "/me/publication.html" | relative_url }}).
+My research was mainly on plasma diagnostics. A list of my publications is available [here]({{ "/me/publication.html" | relative_url }}).
