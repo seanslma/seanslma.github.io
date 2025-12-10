@@ -56,9 +56,11 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+include:
+  - maki/
+
 # Exclude maki folder from Jekyll processing
 exclude:
-  # - maki/
   - vendor/
   - Gemfile
   - Gemfile.lock
