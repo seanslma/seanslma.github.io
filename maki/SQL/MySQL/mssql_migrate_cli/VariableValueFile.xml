@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Variable value file for SSMA Console for MySQL.
+  Specified name and value attribute values are mandatory
+  Name values should begin and end with '$'
+  Use of this file is NOT mandatory
+  option -v[ariable]. See the documentation for SSMA Console for more information.
+-->
+<variables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schemas\ConsoleScriptVariablesSchema.xsd">
+  <!--
+      ********************************** MUST DO **************************************************
+      ***** MUST replace occurrences of {<value>} with appropriate values wherever necessary  *****
+      *********************************************************************************************
+  -->
+
+  <!--
+        ***************************************************************************
+        ***** The "working folder" {Working Folder Path} should exist         *****
+        ***** prior to console script execution                               *****
+        ***************************************************************************
+    -->
+  <variable name="$mysql_table$" value="" />
+  <variable name="$ParentFolder$" value="." />
+  <variable name="$WorkingFolder$" value="$ParentFolder$\wrk" />
+  
+
+  <variable-group name="MySqlParams">
+    <variable-group name="MySqlConnectionParams">
+      <variable name="$SourceUserName$" value="usr" />
+      <variable name="$SourceServer$" value="127.0.0.1" />
+      <variable name="$SourcePort$" value="3306" />
+      <variable name="$SourcePassword$" value="pwd" />
+    </variable-group>
+
+    <variable-group name="MySqlServerObjectParams">
+      <variable name="$SourceDatabase$" value="mydb" />
+    </variable-group>
+  </variable-group>
+
+  <variable-group name="SQLServerParams">
+    <variable-group name="SqlServerConnectionParams">
+      <variable name="$TargetUserName$" value="usr" />
+      <variable name="$TargetServerName$" value="localhost" />
+      <variable name="$TargetDB$" value="master" />
+      <variable name="$TargetPassword$" value="pwd" />
+    </variable-group>
+  </variable-group>
+
+  <variable-group name="ProjectSpecs">
+    <variable name="$project_name$" value="project1" />
+    <variable name="$project_overwrite$" value="true" />
+    <variable name="$project_type$" value="sql-server-2014" />
+    <variable name="$project_folder$" value="$WorkingFolder$\$project_name$" />
+  </variable-group>
+
+  <variable-group name="Reports">
+    <variable name="$SummaryReportsFolder$" value="$project_folder$" />
+    <variable name="$VerbosityBool$" value="true" />
+    <variable name="$ReportErrorBool$" value="true" />
+    <variable name="$AssessmentReportFolderName$" value="AssessmentReports" />
+    <variable name="$AssessmentReportFolder$" value="$WorkingFolder$\$AssessmentReportFolderName$" />
+    <variable name="$AssessmentOverwriteBool$" value="true" />
+    <variable name="$ConvertSchemaARFolder$" value="$WorkingFolder$\$AssessmentReportFolderName$" />
+    <variable name="$SynchronizationReportsFolder$" value="$WorkingFolder$" />
+    <variable name="$SaveScriptFolder$" value="$WorkingFolder$" />
+    <variable name="$RefreshDatabaseFolder$" value="$WorkingFolder$" />
+    <variable name="$ConvertSqlARFolder$" value="$WorkingFolder$\$AssessmentReportFolderName$" />
+    <variable name="$ConvertSQLReports$" value="$WorkingFolder$" />
+    <!--
+        ***************************************************************************
+        ***** The folder {Folder where sql files are stored} needs to exists  *****
+        ***** and should contain the *.sql files that need to be converted    *****
+        ***** using convert-sql-statement command                             *****
+        ***************************************************************************
+    -->  
+    <variable name="$ConvertSqlSampleFiles$" value="$WorkingFolder$\{Folder where sql files are stored}" />
+  </variable-group>
+</variables>

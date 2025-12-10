@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Script file for SSMA Console for MySQL.
+  Commands execution order - from top to bottom.
+  Command Processor distinguishes each command by element name.
+  The element name is invariable! Never modify it!
+  Use this file name as the parameter to SSMA Console for MySQL with mandatory
+  option -s[cript]. See the documentation for SSMA Console for more information.
+-->
+<ssma-script-file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schemas\M2SSConsoleScriptSchema.xsd">
+
+  <!-- Variable values should mandatorily start and end with "$".
+       These values can be defined in a separate variable value file
+       (See: VariableValueFileSample.xml)
+
+       **********************************************************************
+       **********  Set the variable values used by this sample     **********
+       **********  file in the corresponding Variables Value File  **********
+       **********************************************************************
+
+       -->
+  <!-- The escape character for "$" is "$$".If the value of a static value of a parameter begins with "$",
+       then "$$" must be specified to treat it as a static value instead of a variable. -->
+
+  <!-- Optional section with server definitions -->
+  <!-- Note:  Server definitions can be declared in a separate file
+              or can be embedded as part of script file in the servers section (below) -->
+  <servers>
+    <mysql name="source_1">
+      <standard-mode>
+        <server value="$SourceServer$" />
+        <port value="$SourcePort$" />
+        <!-- by default port value is set to 3306 -->
+        <user-id value="$SourceUserName$" />
+        <password value="$SourcePassword$" />
+        <ssl-verify value="false" />
+      </standard-mode>
+    </mysql>
+
+    <sql-server name="target_1">
+      <windows-authentication>
+        <database value="$TargetDB$" />
+        <server value="$TargetServerName$" />
+      </windows-authentication>
+    </sql-server>
+
+    <sql-server name="target_2">
+      <sql-server-authentication>
+        <database value="$TargetDB$" />
+        <server value="$TargetServerName$" />
+        <user-id value="$TargetUserName$" />
+        <password value="$TargetPassword$" />
+      </sql-server-authentication>
+    </sql-server>
+
+    <sql-azure name="target_azure">
+      <sql-server-authentication>
+        <database value="$TargetAzureDB$" />
+        <server value="$TargetAzureServerName$" />
+        <user-id value="$TargetAzureUserName$" />
+        <password value="$TargetAzurePassword$" />
+      </sql-server-authentication>
+    </sql-azure>
+  </servers>
+
+  <!-- Optional section with console configuration options -->
+  <config>
+    <output-providers>
+      <!-- Command specific messages do not appear on console if value set to "true".
+           Attributes: destination="file" (optional)
+                       file-name="<file-path>" (optional along with destination attribute)
+           By default destination="stdout" and suppress-messages="false" -->
+      <output-window suppress-messages="false"
+                     destination="stdout" />
+
+      <!-- Enables upgradation of project created from earlier version of SSMA to current version.
+           Available action attribute values
+             • yes      - upgrades the project (default)
+             • no       - displays an error and halts the execution
+             • ask-user - prompts user for input (yes or no). -->
+      <upgrade-project action="yes" />
+
+      <!-- Progress Reporting. By default progress reporting is disabled.
+           report-progress attribute values
+             • off
+             • every-1%
+             • every-2%
+             • every-5%
+             • every-10%
+             • every-20% -->
+      <progress-reporting enable="false"
+                          report-messages="false"
+                          report-progress="off" />
+
+      <!-- Object overwrite during conversion. By default, action is overwrite.
+           Available action values
+             • error
+             • overwrite
+             • skip
+             • ask-user -->
+      <object-overwrite action="skip" />
+
+      <!-- Sets log verbosity level. By default log verbosity level is "error"
+           Available logger level  options:
+             • fatal-error - Only fatal-error messages are logged
+             • error       - Only error and fatal-error messages are logged
+             • warning     - All levels except debug and info messages are logged
+             • info        - All levels except debug messages are logged
+             • debug       - All levels of messages logged
+           Note: Mandatory messages are logged at any level -->
+      <!--<log-verbosity level="error" />-->
+
+      <!-- Override encrypted password in protected storage with script file password
+           Default option: "false" - Order of search: 1) Protected storage 2) Script File / Server Connection File 3) Prompt User
+                           "true"  - Order of search: 1) Script File / Server Connection File 2) Prompt User -->
+      <!--<encrypted-password override="true" />-->
+    </output-providers>
+  </config>
+
+  <script-commands>
+    <!-- Create a new project.
+         • Customize the new project created with project-folder and project-name attributes.
+         • overwrite-if-exists attribute can take values "true/false" with default as "false".
+         • project-type (optional attribute) can take values
+             sql-server-2012     - Creates SQL Server 2012 SSMA project
+             sql-server-2014     - Creates SQL Server 2014 SSMA project
+             sql-server-2016     - Creates SQL Server 2016 SSMA project
+             sql-server-2017     - Creates SQL Server 2017 SSMA project
+             sql-server-2019     - Creates SQL Server 2019 SSMA project
+             sql-azure           - Creates Azure SQL Database SSMA project
+             sql-azure-mi        - Creates Azure SQL Managed Instance SSMA project -->
+    <create-new-project project-folder="$project_folder$"
+                        project-name="$project_name$"
+                        overwrite-if-exists="$project_overwrite$" />
+
+    <!-- Open an existing project.
+         • Mandatory parameters project-folder and project-name needs to be mentioned. -->
+    <!--<open-project project-folder="$project_folder$"
+                  project-name="$project_name$" />-->
+    
+    <!-- Connect to source database -->
+    <connect-source-database server="source_1" />
+
+    <!-- Collect specific objects in source database -->
+    <!-- It will only collect the databases specified(plus the databases required
+         to be collected).
+         If the metabase already exists, it will remove all databases not specified from the metabase.-->
+    <!--<connect-source-database server="source_1">
+      <object-to-collect object-name="TEST" />
+    </connect-source-database> -->
+    
+    <!-- Connect to target database -->
+    <connect-target-database server="target_1" />
+
+    <!-- Reconnect to source database
+         • Incase connection to source has already been established once -->
+    <!--<reconnect-source-database server="source_1" />-->
+
+    <!-- Re-collect specific objects in source database -->
+    <!-- It will only re-collect the databases specified(plus the databases required
+         to be collected).
+         It will remove all databases not specified from the metabase.-->
+    <!--<reconnect-source-database server="source_1">
+      <object-to-collect object-name="TEST" />
+    </reconnect-source-database> -->
+
+    <!-- Reconnect to target database
+         • Incase connection to target has already been established once -->
+    <!--<reconnect-target-database server="target_1" />-->
+
+    <!-- Convert SQL statement -->
+    <!-- • context specifies the schema name.
+         • destination specifies whether the output should be stored in a file.
+           If this attribute is not specified, then the converted T-SQL statement is displayed on the console. (optional attribute)
+         • conversion-report-folder specifies folder where the assessment report can to be stored.(optional attribute)
+         • conversion-report-overwrite specifies whether to overwrite the assessment report folder if it already exists.
+           Default value: false. (optional attribute)
+         • write-converted-sql-to specifies the name and the path of the file where the converted T-SQL will be stored.
+         • sql specifies the Oracle sql statements to be converted, one or more statements can be seperated using a ";"
+         • sql-files specifies the path of the sql files which has to be converted to T-SQL code.
+         • write-summary-report-to specifies the path where the summary report will be generated.
+           If only the folder path is mentioned,then file by name ConvertSQLReport.XML is created. (optional attribute)
+         • Summary report creation has 2 further sub-categories
+             • report-errors (="true/false", with default as "false" (optional attributes))
+             • verbose (="true/false", with default as "false" (optional attributes))
+     -->
+    <!-- Example 1: Convert direct SQL statements and store the converted T-SQL to a file (with all attributes) -->
+    <convert-sql-statement context="$SourceDatabase$"
+                           destination="file"
+                           conversion-report-folder="$ConvertSqlARFolder$"
+                           conversion-report-overwrite="true"
+                           write-summary-report-to="$SummaryReportsFolder$"
+                           verbose="$VerbosityBool$"
+                           report-errors="$ReportErrorBool$"
+                           write-converted-sql-to ="$ConvertSQLReports$\result1.sql.out"
+                           sql="SELECT * FROM Tbltest;" />
+
+    <!-- Example 2: Convert direct SQL statements and store the converted T-SQL to a file (only mandatory attributes) -->
+    <!--
+    <convert-sql-statement context="$SourceDatabase$"
+                           destination="file"
+                           write-converted-sql-to="$ConvertSQLReports$\result2.sql.out"
+                           sql="SELECT * FROM Tbltest;" />-->
+
+    <!-- Example 3: Convert direct SQL statement and show the T-SQL output to console screen -->
+    <!--
+    <convert-sql-statement context="$SourceDatabase$"
+                           sql="SELECT * FROM Tbltest;" />-->
+
+    <!-- Example 4: Convert SQL statements in a set of .sql files in a folder and store the converted T-SQL to a file (with all attributes) -->
+    <!--
+    <convert-sql-statement context="$SourceDatabase$"
+                           destination="file"
+                           conversion-report-folder="$ConvertSqlARFolder$"
+                           conversion-report-overwrite="true"
+                           write-summary-report-to="$SummaryReportsFolder$"
+                           verbose="$VerbosityBool$"
+                           report-errors="$ReportErrorBool$"
+                           write-converted-sql-to="$ConvertSQLReports$\result3.sql.out"
+                           sql-files="$ConvertSqlSampleFiles$\*.sql" />-->
+
+    <!-- Example 5: Convert SQL statements in a file and store the converted T-SQL to a file
+         (with only mandatory attributes) -->
+    <!--<convert-sql-statement context="$SourceDatabase$"
+                           destination="file"
+                           write-converted-sql-to="$ConvertSQLReports$\result4.sql.out"
+                           sql-files="$ConvertSqlSampleFiles$\test.sql" />-->
+
+    <!-- Example 6: Convert SQL statements in a file and show  output to console screen -->
+    <!--<convert-sql-statement context="$SourceDatabase$"
+                           sql-files="$ConvertSqlSampleFiles$\*.sql" />-->
+
+    <!-- Example 7: Convert multiple SQL source files located in a folder and store the converted T-SQL in corresponding output files in a folder (with all attributes) -->
+    <!--<convert-sql-statement context="$SourceDatabase$"
+                           destination="file"
+                           conversion-report-folder="$ConvertSqlARFolder$"
+                           conversion-report-overwrite="true"
+                           write-summary-report-to="$SummaryReportsFolder$"
+                           verbose="$VerbosityBool$"
+                           report-errors="$ReportErrorBool$"
+                           write-converted-sql-to="$ConvertSQLReports$"
+                           sql-files="$ConvertSqlSampleFiles$\*.sql" />-->
+
+    <!-- Save project -->
+    <save-project />
+
+    <!-- Close project -->
+    <close-project if-modified="save" />
+  </script-commands>
+</ssma-script-file>

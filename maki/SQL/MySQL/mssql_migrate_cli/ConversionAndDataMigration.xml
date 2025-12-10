@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Script file for SSMA Console for MySQL.
+  Commands execution order - from top to bottom.
+  Command Processor distinguishes each command by element name.
+  The element name is invariable! Never modify it!
+  Use this file name as the parameter to SSMA Console for MySQL with mandatory
+  option -s[cript]. See the documentation for SSMA Console for more information.
+-->
+<ssma-script-file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schemas\M2SSConsoleScriptSchema.xsd">
+
+  <!-- Variable values should mandatorily start and end with "$".
+       These values can be defined in a separate variable value file
+       (See: VariableValueFileSample.xml)
+
+       **********************************************************************
+       **********  Set the variable values used by this sample     **********
+       **********  file in the corresponding Variables Value File  **********
+       **********************************************************************
+
+       -->
+  <!-- The escape character for "$" is "$$".If the value of a static value of a parameter begins with "$",
+       then "$$" must be specified to treat it as a static value instead of a variable. -->
+
+  <!-- Optional section with server definitions -->
+  <!-- Note:  Server definitions can be declared in a separate file
+              or can be embedded as part of script file in the servers section (below) -->
+  <servers>
+    <mysql name="source_1">
+      <standard-mode>
+        <server value="$SourceServer$" />
+        <port value="$SourcePort$" />
+        <!--by default port value is set to 3306-->
+        <user-id value="$SourceUserName$" />
+        <password value="$SourcePassword$" />
+        <ssl-verify value="false" />
+      </standard-mode>
+    </mysql>
+
+    <sql-server name="target_1">
+      <windows-authentication>
+        <database value="$TargetDB$" />
+        <server value="$TargetServerName$" />
+      </windows-authentication>
+    </sql-server>
+  </servers>
+
+  <!-- Optional section with console configuration options -->
+  <config>
+    <output-providers>
+      <!-- Command specific messages do not appear on console if value set to "true".
+           Attributes: destination="file" (optional)
+                       file-name="<file-path>" (optional along with destination attribute)
+           By default destination="stdout" and suppress-messages="false" -->
+      <output-window suppress-messages="false"
+                     destination="file"
+                     file-name="$ParentFolder$\log\report_$project_name$.log" />
+
+      <!-- Enables upgradation of project created from earlier version of SSMA to current version.
+           Available action attribute values
+             • yes      - upgrades the project (default)
+             • no       - displays an error and halts the execution
+             • ask-user - prompts user for input (yes or no). -->
+      <upgrade-project action="yes" />
+
+      <!-- Enables creation of database during connection. By default, mode is error.
+           Available mode values
+             • ask-user - prompts user for input (yes or no).
+             • error    - console displays error and halts the execution.
+             • continue - console continues the execution. -->
+      <user-input-popup mode="continue" />
+
+      <!-- Data migration connection parameters
+           Specifies which source or target server to be considered for data migration
+           Attributes: source-use-last-used="true" (default) or source-server="source_servername"
+                       target-use-last-used="true" (default) or target-server="target_servername" -->
+      <data-migration-connection source-use-last-used="true"
+                                 target-use-last-used="true" />
+
+      <!-- Progress Reporting. By default progress reporting is disabled.
+           Report-progress attribute values
+             • off
+             • every-1%
+             • every-2%
+             • every-5%
+             • every-10%
+             • every-20% -->
+      <progress-reporting enable="true"
+                          report-messages="true"
+                          report-progress="off" />
+
+      <!-- Reconnect manager -->
+      <!-- Reconnection parameter settings incase of connection failure
+           Available reconnection modes
+             • reconnect-to-last-used-server - If the connection is not alive it tries to reconnect to last used server
+             • generate-an-error             - If the connection is not alive it throws an error (default) -->
+      <reconnect-manager on-source-reconnect="reconnect-to-last-used-server"
+                         on-target-reconnect="reconnect-to-last-used-server" />
+
+      <!-- Prerequisites display options.
+           If strict-mode is true, an exception is thrown in case of prerequisite failures -->
+      <prerequisites strict-mode="false" />
+
+      <!-- Object overwrite during conversion. By default, action is overwrite.
+           Available action values
+             • error
+             • overwrite
+             • skip
+             • ask-user -->
+      <object-overwrite action="overwrite" />
+
+      <!-- Sets log verbosity level. By default log verbosity level is "error"
+           Available logger level  options:
+             • fatal-error - Only fatal-error messages are logged
+             • error       - Only error and fatal-error messages are logged
+             • warning     - All levels except debug and info messages are logged
+             • info        - All levels except debug messages are logged
+             • debug       - All levels of messages logged
+           Note: Mandatory messages are logged at any level -->
+      <log-verbosity level="warning" />
+
+      <!-- Override encrypted password in protected storage with script file password
+           Default option: "false" - Order of search: 1) Protected storage 2) Script File / Server Connection File 3) Prompt User
+                           "true"  - Order of search: 1) Script File / Server Connection File 2) Prompt User -->
+      <encrypted-password override="false" />
+    </output-providers>
+  </config>
+
+  <script-commands>
+    <!-- Create a new project.
+         • Customize the new project created with project-folder and project-name attributes.
+         • overwrite-if-exists attribute can take values "true/false" with default as "false".
+         • project-type (optional attribute) can take values
+             sql-server-2012     - Creates SQL Server 2012 SSMA project
+             sql-server-2014     - Creates SQL Server 2014 SSMA project (default)
+             sql-server-2016     - Creates SQL Server 2016 SSMA project
+             sql-server-2017     - Creates SQL Server 2017 SSMA project
+             sql-server-2019     - Creates SQL Server 2019 SSMA project
+             sql-azure           - Creates Azure SQL Database SSMA project
+             sql-azure-mi        - Creates Azure SQL Managed Instance SSMA project -->
+    <create-new-project project-folder="$project_folder$"
+                        project-name="$project_name$"
+                        project-type="$project_type$"
+                        overwrite-if-exists="$project_overwrite$" />
+
+    <!-- Set project preference.
+         Preference path/name/value can be found in preferences.prefs file stored in SSMA project directory.
+         Preference path is the node name path starting from root to leaf node separating by "/". -->
+    <!--<set-project-preference preference-path="prefs/ssma-for-mysql/m2ss/conversion"
+                            preference-name="function-conversion"
+                            preference-value="convert-to-function" />-->
+
+    <!-- Set project type mapping.
+         • Schema types to choose:
+           - Generic type mapping -->
+    <!-- Example 1: Set project type mapping -->
+    <!--<set-project-type-mapping type-mapping-schema="Generic type mapping"
+                                  source-type-id="BOOLEAN"
+                                  target-type-id="BIT" />-->
+
+    <!-- Example 2: Set project type mapping with parameters, need to add suffix '@' sign with number of parameters in type-id
+         Attributes start/end/value in type parameter are optional -->
+    <!--<set-project-type-mapping type-mapping-schema="Generic type mapping"
+                                  source-type-id="BLOB@1"
+                                  target-type-id="VARBINARY@1">
+      <source-type-param start="2000" end="6000" />
+      <target-type-param value="8000" />
+    </set-project-type-mapping>-->
+
+    <!-- Connect to source database -->
+    <!-- • Server(id) needs to mandatorily be defined in the servers section of the
+           script file or in the Servers Connection File -->
+    <connect-source-database server="source_1" />
+
+    <!-- Collect specific objects in source database -->
+    <!-- It will only collect the database specified(plus the databases required
+         to be collected).
+         If the metabase already exists, it will remove all databases not specified from the metabase.-->
+    <!--<connect-source-database server="source_1">
+      <object-to-collect object-name="TEST" />
+    </connect-source-database> -->
+    
+    <!-- Set object type mapping.
+         • Schema types to choose:
+           - Generic type mapping
+         • object-name specifies the object(s) considered for setting type mapping
+           (can have individual object names or a category object name)
+         • object-type specifies the type of the object specified in the object-name attribute
+           (if object category is specified then object type will be "category") -->
+    <!-- Example 1: Set object type mapping -->
+    <!--<set-object-type-mapping type-mapping-schema="Generic type mapping"
+                             source-type-id="BOOLEAN"
+                             target-type-id="BIT"
+                             object-name="$SourceDatabase$.Tables"
+                             object-type="category" />-->
+
+    <!-- Example 2: Set object type mapping with parameters, need to add suffix '@' sign with number of parameters in type-id
+         Attributes start/end/value in type parameter are optional -->
+    <!--<set-object-type-mapping type-mapping-schema="Generic type mapping" source-type-id="BLOB@1" target-type-id="VARBINARY@1" object-name="$SourceDatabase$.Tables" object-type="category">
+      <source-type-param start="1000" end="2000" />
+      <target-type-param value="2000" />
+    </set-object-type-mapping>-->
+
+    <!-- Connect to target database -->
+    <!-- • Server(id) needs to mandatorily be defined in the servers section of the
+           script file or in the Servers Connection File -->
+    <connect-target-database server="target_1" />
+
+    <!-- Schema Mapping -->
+    <!-- • source-schema specifies the source schema we intend to migrate.
+         • sql-server-schema specifies the target schema where we want it to be migrated. -->
+    <map-schema source-schema="$SourceDatabase$"
+                sql-server-schema="$TargetDB$.dbo" />
+
+    <!-- Convert schema -->
+    <!-- • object-name specifies the object(s) considered for conversion.
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • conversion-report-folder specifies folder where the assessment report can to be stored.(optional attribute)
+         • conversion-report-overwrite specifies whether to overwrite the assessment report folder if it already exists.
+           Default value: false. (optional attribute)
+         • write-summary-report-to specifies the path where the summary report will be generated.
+           If only the folder path is mentioned,then file by name SchemaConversionReport.XML is created. (optional attribute)
+         • Summary report creation has 2 further sub-categories
+             • report-erors (="true/false", with default as "false" (optional attributes))
+             • verbose (="true/false", with default as "false" (optional attributes))
+     -->
+    <!-- Example 1: Convert entire Database (with all attributes) -->
+    <convert-schema object-name="$SourceDatabase$"
+                    object-type="Databases"
+                    write-summary-report-to="$SummaryReportsFolder$"
+                    verbose="$VerbosityBool$"
+                    report-errors="$ReportErrorBool$"
+                    conversion-report-folder="$ConvertSchemaARFolder$"
+                    conversion-report-overwrite="true" />
+
+    <!-- Example 2: Convert entire Schema (only with mandatory attributes) -->
+    <!--<convert-schema object-name="$SourceDatabase$"
+                    object-type="Databases" />-->
+
+    <!-- alternate convention for ConvertSchema command -->
+    <!-- Example 3: Convert a specific category(say Tables) -->
+    <!--<convert-schema>
+      <metabase-object object-name="$SourceDatabase$.Tables"
+                   object-type="category" />
+    </convert-schema>-->
+
+    <!-- Example 4: Convert Schema for a specific object (say Table)
+         (with only a few optional attributes & write-summary-report-to with a file name) -->
+    <!--<convert-schema object-name="$SourceDatabase$.TestTbl"
+                    object-type="Tables"
+                    write-summary-report-to="$SummaryReportsFolder$\ConvertSchemaReport1.xml"
+                    report-errors="true" />-->
+
+    <!-- Synchronize target -->
+    <!-- • object-name specifies the object(s) considered for synchronization.
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • on-error specifies whether to specify synchronization errors as warnings or error.
+           Available options for on-error:
+             • report-total-as-warning
+             • report-each-as-warning
+             • fail-script
+         • report-errors-to specifies location of error report for the synchronization operation (optional attribute)
+           if only folder path is given, then file by name TargetSynchronizationReport.XML is created.
+     -->
+    <!-- Example 1: Synchronize target entire Database with all attributes -->
+    <!--<synchronize-target object-name="$TargetDB$.dbo"
+                        on-error="fail-script"
+                        report-errors-to="$SynchronizationReportsFolder$" />-->
+
+    <!-- Example 2: Synchronizing a particular category (say Procedures) of the schema alone -->
+    <synchronize-target object-name="$TargetDB$.dbo"
+                        object-type="Schemas" />
+
+    <!-- (alternative convention for Synchronize target command) -->
+    <!-- Example 3: Synchronization target of individual objects -->
+    <!--
+    <synchronize-target>
+      <metabase-object object-name="$TargetDB$.dbo.TblTest"
+                       object-type="Tables" />
+    </synchronize-target>-->
+
+    <!-- Example 4: Synchronization  of individual objects with no object-type attribute -->
+    <!--
+    <synchronize-target>
+      <metabase-object object-name="$TargetDB$.dbo.TblTest" />
+    </synchronize-target>-->
+
+    <!-- Save As Script -->
+    <!-- Used to save the Scripts of the objects to a file mentioned
+         when metabase=target ,this is an alternative to synchronization command where in we get the scripts and execute the same on the target database.
+         • object-name specifies the object(s) whose scripts are to be saved.
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • destination specifies the path or the folder where the script has to be saved, if the file name is not given then a file name in the format (object_name attribute value).out
+         • metabase specifies whether it ithe source or target metabase.
+         • overwrite if true then it overwrites, if same filename exist -->
+
+    <!-- Example 1: Save as script from source metabase -->
+    <!--<save-as-script destination="$SaveScriptFolder$"
+                    metabase="source"
+                    object-name="$SourceDatabase$"
+                    object-type="Databases"
+                    overwrite="true" />-->
+
+    <!-- Example 2: Save as script from target metabase -->
+    <!--<save-as-script metabase="target" destination="$SaveScriptFolder$">
+      <metabase-object object-name="$TargetDB$.dbo" object-type ="Schemas" />
+    </save-as-script>-->
+
+    <!-- Refresh from database -->
+    <!--
+         Refreshes the source database
+         • object-name specifies the object(s) considered for refresh .
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • on-error specifies whether to specify refresh errors as warnings or error.
+           Available options for on-error:
+             • report-total-as-warning
+             • report-each-as-warning
+             • fail-script
+             • report-errors-to specifies location of error report for the refresh operation (optional attribute)
+               if only folder path is given, then file by name SourceDBRefreshReport.XML is created
+    -->
+    <!-- Example 1: Refresh entire Schema (with all attributes) -->
+    <!--
+    <refresh-from-database object-name="$SourceDatabase$"
+                           object-type ="Databases"
+                           on-error="fail-script"
+                           report-errors-to="$RefreshDatabaseFolder$" />-->
+
+    <!-- Example 2: Refresh a particular category say a procedure
+         (other convention of the command with only mandatory attributes) -->
+    <!--
+    <refresh-from-database>
+      <metabase-object object-name="$SourceDatabase$.Procedures" object-type="category" />
+    </refresh-from-database>-->
+
+    <!-- Data Migration -->
+    <!-- • object-name specifies the object(s) considered for data migration.
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • write-summary-report-to specifies the path where the summary report will be generated.
+           If only the folder path is mentioned,then file by name DataMigrationReport.XML is created. (optional attribute)
+         • Summary report creation has 2 further sub-categories
+             • report-erors (="true/false", with default as "false" (optional attributes))
+             • verbose (="true/false", with default as "false" (optional attributes))
+    -->
+    <!-- Example 1: Data Migration of all tables in the schema (with all attributes) -->
+    <migrate-data object-name="$SourceDatabase$.Tables"
+                  object-type="category"
+                  write-summary-report-to="$SummaryReportsFolder$"
+                  report-errors="true"
+                  verbose="false" />
+
+    <!-- alternative convention for Data Migration Command -->
+    <!-- Example 2: Data Migration of specific tables with no object-type attribute
+                    & write-summary-report-to with a file name -->
+    <!--
+    <migrate-data write-summary-report-to="$SummaryReportsFolder$\DataMigrationReport.xml"
+                  verbose="true">
+      <metabase-object object-name="$SourceDatabase$.TblTest" />
+    </migrate-data>-->
+
+    <!-- Save project -->
+    <save-project/>
+
+    <!-- Close project -->
+    <close-project/>
+
+  </script-commands>
+</ssma-script-file>

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: buildkitc
+  namespace: dev
+  labels:
+    app: ubuntu
+spec:
+  containers:
+  - image: docker.example.com/uat/tfs-agent:0.0.1
+    command:
+      - "sleep"
+      - "604800"
+    imagePullPolicy: IfNotPresent
+    name: ubuntu
+  restartPolicy: Always
+
+# after deploy the pod, exec into it and 
+# install buildctl: 
+#  https://kubernetes.courselabs.co/labs/buildkit  
+# clone repo and build: 
+#  ../../bin/buildctl --addr tcp://buildkitd:1234 build 
+#  --frontend=dockerfile.v0 --local context=. --local dockerfile=./docker/linux/ --opt filename=my-app.docker 
+#  --opt build-arg:NAME=test --opt "build-arg:DESCRIPTION=A docker image for testing and debugging issues" 
+#  --output type=image,name=registry.dev.svc.cluster.local:5000/uat/test:0.0.1,push=true,registry.insecure=true

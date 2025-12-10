@@ -1,0 +1,27 @@
+/* Move the collapse/expand icon to the left */
+.md-nav__link {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .md-nav__link .md-ellipsis {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  /* Adjust spacing - the arrow is now on the left after reversing */
+  .md-nav__item--nested > .md-nav__link::after {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+
+  .md-nav__link:not(.md-nav__link--active) {
+    padding-left: 0.8rem;
+    padding-right: 1.2rem;
+  }
+
+  /* Make sure all nested items show their arrows (Material theme already creates them) */
+  .md-nav__item--nested > .md-nav__link::after {
+    display: inline-block !important;
+    opacity: 1 !important;
+  }

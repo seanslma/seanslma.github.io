@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: buildkitd
+  namespace: dev
+  labels:
+    app: buildkitd
+spec:
+  ports:
+  - port: 1234
+    targetPort: buildkitd
+  selector:
+    app: buildkitd
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: buildkitd
+  namespace: dev
+data:
+  buildkitd.toml: |
+    [registry."registry.dev.svc.cluster.local:5000"]
+      http = true
+      insecure = true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buildkitd
+  namespace: dev
+  labels:
+    app: buildkitd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buildkitd
+  template:
+    metadata:
+      labels:
+        app: buildkitd
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: buildkitd
+        image: moby/buildkit:v0.9.0
+        args:
+          - --addr
+          - unix:///run/buildkit/buildkitd.sock
+          - --addr
+          - tcp://0.0.0.0:1234
+          - --config=/home/user/.config/buildkit/buildkitd.toml
+        securityContext:
+          privileged: true
+        ports:
+          - name: buildkitd
+            containerPort: 1234
+        volumeMounts:
+        - name: buildkitd-config
+          mountPath: /home/user/.config/buildkit
+      volumes:
+      - name: buildkitd-config
+        configMap:
+          name: buildkitd

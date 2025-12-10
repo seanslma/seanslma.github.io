@@ -56,10 +56,21 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+# Exclude maki folder from Jekyll processing
+exclude:
+  # - maki/
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - .bundle/
+  - README.md
+  - LICENSE
+
 header_pages:
   - index.md
-  - category.md
-  - about.md
+  - maki.md
+  - blog.md
 
 defaults:
   - scope:

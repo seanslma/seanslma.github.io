@@ -1,0 +1,98 @@
+\documentclass[a4paper,9pt]{article}
+
+\usepackage[
+  body={18true cm, 27true cm},
+  left=12.3mm
+]{geometry}  %simple version
+
+\usepackage[
+  pdftex,
+  bookmarks=false,
+  colorlinks=true,
+  pdfborder={0 0 0},   % 0 0 1
+  citecolor=black,     % blue
+  linkcolor=black,     % red
+  anchorcolor=black,   % green
+  urlcolor=blue,       % blue
+  breaklinks=true,
+  pdfstartview={XYZ null null 1.33}
+]{hyperref}
+
+% patch commands
+\usepackage{etoolbox}
+
+% default font
+\usepackage[sfdefault]{notomath}
+
+% space between lines
+\renewcommand{\baselinestretch}{0.9}
+
+% set paragraph indent to 0pt
+\setlength{\parindent}{0pt}
+% vertical space betwen paragraphs
+% \setlength{\parskip}{0pt} % remove extra space
+\setlength{\parskip}{3pt plus1pt minus1pt}
+
+% code block highlighting
+\usepackage{minted}
+\usepackage{xcolor} % to access the named colour LightGray
+\definecolor{LightGray}{gray}{0.95}
+
+% \newlength{\fancyvrbtopsep}
+% \newlength{\fancyvrbpartopsep}
+% \makeatletter
+% \FV@AddToHook{\FV@ListParameterHook}{\topsep=\fancyvrbtopsep\partopsep=\fancyvrbpartopsep}
+% \makeatother
+% \setlength{\fancyvrbtopsep}{0pt}    % space before code block
+% \setlength{\fancyvrbpartopsep}{0pt} % space after code block
+
+% set code format
+\setminted[python]{
+  % frame=leftline,
+  framesep=0mm,
+  baselinestretch=0.7,
+  % bgcolor=LightGray,
+  fontsize=\footnotesize,
+  numbersep=2pt
+  % linenos,
+}
+
+\newminted{py}{
+  % frame=leftline,
+  framesep=0mm,
+  baselinestretch=0.7,
+  % bgcolor=LightGray,
+  fontsize=\footnotesize,
+  numbersep=0pt
+  % linenos,
+}
+
+\AtBeginEnvironment{minted}{\vspace{-8pt}}
+\AfterEndEnvironment{minted}{\vspace{-6pt}}
+
+\begin{document}
+This is the first section of this book.
+
+And this is another paragraph and it's very long.
+Also there are some other text to make it even longer.
+Here is an example of python code block:
+\begin{minted}{python}
+x = [0, 1, 2, 3, 4]
+for i in x:
+    if i < 1:
+        print('Hello World!')
+    else:
+        print(f'Hello No.{i}')
+\end{minted}
+
+Here is another example using the redefined minted. Why it has the indentation???
+\begin{pycode}
+  x = [0, 1, 2, 3, 4]
+  for i in x:
+      if i < 1:
+          print('Hello World!')
+      else:
+          print(f'Hello No.{i}')
+  \end{pycode}
+
+\end{document}

@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  "sales-api"
+  namespace: "dev"
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: "sales-api"
+  template:
+    metadata:
+      labels:
+        app: "sales-api"
+        aadpodidbinding: "dev-sales-api"
+    spec:
+      enableServiceLinks: False
+      containers:
+        - name: "sales-api"
+          image: "<my-acr>.azurecr.io/dev/sales-api:1.0.0"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: "0.2"
+            limits:
+              memory: 8Gi
+              cpu: "2"
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /my/file/path/
+              readOnly: true
+            - name: keyvault-volume
+              mountPath: /home/<username>/.config/secret-files/
+              readOnly: true
+          env:
+            - name: HYPERCORN_HOST
+              value: "0.0.0.0"
+            - name: HYPERCORN_PORT
+              value: "8000"
+            - name: HYPERCORN_ROOT_PATH
+              value: "/api"
+            - name: HYPERCORN_WORKER_CLASS
+              value: "uvloop"
+            - name: HYPERCORN_WORKERS
+              value: "2"
+            - name: HYPERCORN_DEBUG
+              value: "False"
+            - name: AZURE_STORAGE_ACCOUNT
+              value: "<my-acr>"
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: k8s-secret
+        - name: keyvault-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "sales-api-database"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "sales-api"
+  namespace: "dev"
+spec:
+  ports:
+    - port: 8000
+  selector:
+    app: "sales-api"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "sales-api"
+  namespace: "dev"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: "Host(`data.example.com`) && PathPrefix(`/sales`)"
+      middlewares:
+        - name: "sales-api-stripprefix"
+      services:
+        - kind: Service
+          name: "sales-api"
+          namespace: "dev"
+          passHostHeader: true
+          port: 8000
+  tls: {}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: "sales-api-stripprefix"
+  namespace: "dev"
+spec:
+  stripPrefix:
+    prefixes:
+      - "/sales"
+---
+kind: AzureIdentity         # For accessing azure resources  
+---
+kind: AzureIdentityBinding  # For accessing azure resources  
+---
+kind: SecretProviderClass   # For the keyvault-volume

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Server configuration file for SSMA Console for MySQL.
+  The element name is invariable! Never modify it!
+  Use this file name as the parameter to SSMA Console for MySQL with mandatory
+  option -c[serverconnection].
+  See the documentation for SSMA Console for more information.
+  Each server is identified by unique server-ids.
+-->
+<servers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schemas\M2SSConsoleScriptServersSchema.xsd">
+  <mysql name="source_1">
+    <standard-mode>
+      <server value="$SourceServer$" />
+      <port value="$SourcePort$" />
+      <!-- by default port value is set to 3306 -->
+      <user-id value="$SourceUserName$" />
+      <password value="$SourcePassword$" />
+      <ssl-verify value="false" />
+    </standard-mode>
+  </mysql>
+
+  <sql-server name="target_1">
+    <windows-authentication>
+      <database value="$TargetDB$" />
+      <server value="$TargetServerName$" />
+    </windows-authentication>
+  </sql-server>
+
+  <sql-server name="target_2">
+    <sql-server-authentication>
+      <database value="$TargetDB$" />
+      <server value="$TargetServerName$" />
+      <user-id value="$TargetUserName$" />
+      <password value="$TargetPassword$" />
+    </sql-server-authentication>
+  </sql-server>
+
+  <sql-azure name="target_azure">
+    <sql-server-authentication>
+      <database value="$TargetAzureDB$" />
+      <server value="$TargetAzureServerName$" />
+      <user-id value="$TargetAzureUserName$" />
+      <password value="$TargetAzurePassword$" />
+    </sql-server-authentication>
+  </sql-azure>
+
+  <sql-azure-mi name="target_azure_mi">
+    <ad-integrated-authentication>
+      <database value="$TargetAzureDB$" />
+      <server value="$TargetAzureServerName$" />
+    </ad-integrated-authentication>
+  </sql-azure-mi>
+</servers>

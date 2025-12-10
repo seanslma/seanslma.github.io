@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Script file for SSMA Console for MySQL.
+  Commands execution order - from top to bottom.
+  Command Processor distinguishes each command by element name.
+  The element name is invariable! Never modify it!
+  Use this file name as the parameter to SSMA Console for MySQL with mandatory
+  option -s[cript]. See the documentation for SSMA Console for more information.
+-->
+
+<!-- Assesment Report Generation for SSMA Console for MySQL-->
+<ssma-script-file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schemas\M2SSConsoleScriptSchema.xsd">
+
+  <!-- Server definitions are given in a seperate Servers Connection file in this sample
+       Use {-c|serverconnection} command-line option and specify the Servers Connection File path
+       (See: ServerConnectionSample.xml) -->
+  <!-- Variable values should mandatorily start and end with "$".
+       These values can be defined in a separate variable value file
+       (See: VariableValueFileSample.xml)
+
+       **********************************************************************
+       **********  Set the variable values used by this sample     **********
+       **********  file in the corresponding Variables Value File  **********
+       **********************************************************************
+
+       -->
+  <!-- The escape character for "$" is "$$".If the value of a static value of a parameter begins with "$",
+       then "$$" must be specified to treat it as a static value instead of a variable. -->
+
+  <!-- Optional section with console configuration options -->
+  <config>
+    <output-providers>
+      <!-- Command specific messages do not appear on console if value set to "true".
+           Attributes:  destination="file" (optional)
+                        file-name="<file-path>" (optional along with destination attribute)
+           By default destination="stdout" and suppress-messages="false" -->
+      <output-window suppress-messages="false"
+                     destination="stdout" />
+
+      <!-- Enables upgradation of project created from earlier version of SSMA to current version.
+           Available action attribute values
+             • yes      - upgrades the project (default)
+             • no       - displays an error and halts the execution
+             • ask-user - prompts user for input (yes or no). -->
+      <upgrade-project action="yes" />
+
+      <!-- Enables creation of database during connection. By default, mode is error.
+           Available mode values
+             • ask-user - prompts user for input (yes or no).
+             • error    - console displays error and halts the execution.
+             • continue - console continues the execution. -->
+      <!--<user-input-popup mode="continue" />-->
+
+      <!-- Progress Reporting. By default progress reporting is disabled.
+           report-progress attribute values
+             • off
+             • every-1%
+             • every-2%
+             • every-5%
+             • every-10%
+             • every-20% -->
+      <progress-reporting enable="false"
+                          report-messages="false"
+                          report-progress="off" />
+
+      <!-- Prerequisites check. By default strict mode is false.
+           Incase of prerequisite check failure, when strict-mode is true, an exception is thrown -->
+      <!--<prerequisites strict-mode="true" />-->
+
+      <!-- Sets log verbosity level. By default log verbosity level is "error"
+           Available logger level options:
+             • fatal-error - Only fatal-error messages are logged
+             • error       - Only error and fatal-error messages are logged
+             • warning     - All levels except debug and info messages are logged
+             • info        - All levels except debug messages are logged
+             • debug       - All levels of messages logged
+           Note: Mandatory messages are logged at any level -->
+      <log-verbosity level="error" />
+
+      <!-- Override encrypted password in protected storage with script file password
+           Default option: "false" - Order of search: 1) Protected storage 2) Script File / Server Connection File 3) Prompt User
+                           "true"  - Order of search: 1) Script File / Server Connection File 2) Prompt User -->
+      <!-- <encrypted-password override="true" />-->
+
+    </output-providers>
+  </config>
+
+  <script-commands>
+    <!-- Create a new project.
+         • Customize the new project created with project-folder and project-name attributes.
+         • overwrite-if-exists attribute can take values "true/false" with default as "false".
+         • project-type (optional attribute) can take values
+             sql-server-2012     - Creates SQL Server 2012 SSMA project
+             sql-server-2014     - Creates SQL Server 2014 SSMA project (default)
+             sql-server-2016     - Creates SQL Server 2016 SSMA project
+             sql-server-2017     - Creates SQL Server 2017 SSMA project
+             sql-server-2019     - Creates SQL Server 2019 SSMA project
+             sql-azure           - Creates Azure SQL Database SSMA project
+             sql-azure-mi        - Creates Azure SQL Managed Instance SSMA project -->
+    <create-new-project project-folder="$project_folder$"
+                        project-name="$project_name$"
+                        project-type="$project_type$"
+                        overwrite-if-exists="$project_overwrite$" />
+
+    <!-- Connect to source database -->
+    <!-- • Server(id) needs to mandatorily be defined in the servers section of the
+           script file or in the Servers Connection File -->
+    <connect-source-database server="source_1" />
+
+    <!-- Generate assesment report -->
+    <!-- • object-name specifies the object(s) considered for assessment report generation.
+           (can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if object category is specified then object type will be "category")
+         • assessment-report-folder specifies folder where the assessment report can to be stored.(optional attribute)
+         • assessment-report-overwrite specifies whether to overwrite the assessment report folder if it already exists.
+           Default value: false. (optional attribute)
+         • write-summary-report-to specifies the path where the summary report will be generated.
+           If only the folder path is mentioned,then file by name AssessmentReport.XML is created. (optional attribute)
+         • Summary report creation has 2 further sub-categories
+             • report-erors (="true/false", with default as "false" (optional attributes))
+             • verbose (="true/false", with default as "false" (optional attributes))
+      -->
+    <!-- Example 1: Assesment report generation of entire schemas with all attributes -->
+    <generate-assessment-report object-name="$SourceDatabase$"
+                                object-type="Databases"
+                                write-summary-report-to="$SummaryReportsFolder$"
+                                verbose="$VerbosityBool$"
+                                report-errors="$ReportErrorBool$"
+                                assessment-report-folder="$AssessmentReportFolder$"
+                                assessment-report-overwrite="$AssessmentOverwriteBool$" />
+
+    <!-- Example 2: Assesment report generation of entire tables with all attributes -->
+    <!--<generate-assessment-report object-name="$SourceDatabase$.Tables"
+                                object-type="Databases"
+                                write-summary-report-to="$SummaryReportsFolder$"
+                                verbose="$VerbosityBool$"
+                                report-errors="$ReportErrorBool$"
+                                assessment-report-folder="$AssessmentReportFolder$"
+                                assessment-report-overwrite="$AssessmentOverwriteBool$" />-->
+
+    <!-- Example 3: Assesment report generation for a specific table (only mandatory attributes used) -->
+    <!--<generate-assessment-report object-name="$SourceDatabase$.Testtbl"
+                                object-type="Tables" />-->
+
+    <!-- Example 4: Assesment report generation for a particular category (procedures) in the schema
+         (Specifying attributes within an inner xml is also an acceptable convention) -->
+    <!--<generate-assessment-report>
+      <metabase-object object-name="$SourceDatabase$.Procedures"
+                   object-type="category" />
+    </generate-assessment-report>-->
+
+    <!-- Example 5: Assesment report generation with a few optional attributes
+         & write-summary-report-to with a file name -->
+    <!--<generate-assessment-report object-name="$SourceDatabase$.Views"
+                                object-type="category"
+                                report-errors="$ReportErrorBool$"
+                                write-summary-report-to="$SummaryReportsFolder$\AssessmentReport1.xml">
+      <output-window destination ="stdout" />
+      <progress-reporting enable ="true" report-messages ="true" report-progress ="off" />
+    </generate-assessment-report>-->
+
+    <!-- Force Load -->
+    <!-- • object-name specifies the object(s) for force load.(can have indivdual object names or a group object name)
+         • object-type specifies the type of the object specified in the object-name attribute.
+           (if group object name is specified then object type will be "category")
+         Note: force loading helps in working on the SSMA project in an offline mode,
+               i.e. connectivity to source and target servers are not needed.
+      -->
+    <!-- FORCE LOAD SOURCE SCHEMA -->
+    <!-- Example 1: Force Load Source: Force Loading entire Schema -->
+
+    <force-load object-name="$SourceDatabase$" object-type="Databases" metabase="source" />
+
+    <!-- Example 2: Force Load Source: Force Loading entire Database -->
+    <!--<force-load object-name="$SourceDatabase$" object-type="Databases" metabase="source" />-->
+
+    <!-- Example 3: Force Load Source: Force Loading a particular category (say Tables) -->
+    <!--<force-load object-name="$SourceDatabase$.Tables" object-type="category" metabase="source" />-->
+
+    <!-- alternate command for Force Load Source -->
+
+    <!-- Example 4: Force Load Source: Force Loading entire Schema -->
+    <!--<force-load metabase="source">
+      <metabase-object object-name="$SourceDatabase$" object-type="Databases" />
+    </force-load>-->
+
+    <!-- Example 5: Force Load Source: Force Loading a particular category (say Tables) -->
+    <!--<force-load metabase="source">
+     <metabase-object object-name="$SourceDatabase$.Testtbl" />
+   </force-load>-->
+
+    <!-- Save project -->
+    <save-project/>
+
+    <!-- Close project -->
+    <close-project/>
+  </script-commands>
+</ssma-script-file>

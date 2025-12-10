@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: standalone-redis
+  namespace: your-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: standalone-redis
+  template:
+    metadata:
+      labels:
+        app: standalone-redis
+    spec:
+      containers:
+      - name: redis
+        image: public.ecr.aws/docker/library/redis:7.0.4-alpine
+        ports:
+        - containerPort: 6379
+        resources: {}

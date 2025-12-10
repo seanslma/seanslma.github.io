@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapi-deployment
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapi
+  template:
+    metadata:
+      labels:
+        app: webapi
+    spec:
+      containers:
+        - name: webapi-container
+          image: your-webapi-image:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: data-volume     # The name of the volume defined below
+              mountPath: /app/data  # Mount path in the container
+      volumes:
+        - name: data-volume   # The same name as used in volumeMounts
+          hostPath:
+            path: /host/data  # Host path where your data is located on the host machine
