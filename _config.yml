@@ -56,13 +56,22 @@ titles_from_headings:
   strip_title: true
   collections: true
 
-# include:
-#   - maki/
+include:
+  - maki/
 
-# Exclude maki folder from Jekyll processing
-# But keep the maki folder in the final site
-keep_files:
-  - maki
+# Prevent Jekyll from processing files in maki
+# by setting default layout to null for everything in maki
+defaults:
+  - scope:
+      path: "maki"
+    values:
+      layout: null
+  - scope:
+      path: "blog"
+      type: posts
+    values:
+      tags: ["Other"]
+
 
 exclude:
   - vendor/
@@ -77,12 +86,5 @@ header_pages:
   - index.md
   - maki.md
   - blog.md
-
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      tags: ["Other"]
 
 counter_analytics: true
