@@ -56,16 +56,16 @@ titles_from_headings:
   strip_title: true
   collections: true
 
-include:
-  - maki/
+# include:
+#   - maki/
 
 # Prevent Jekyll from processing files in maki
 # by setting default layout to null for everything in maki
 defaults:
-  - scope:
-      path: "maki"
-    values:
-      layout: null
+  # - scope:
+  #     path: "maki"
+  #   values:
+  #     layout: null
   - scope:
       path: "blog"
       type: posts
