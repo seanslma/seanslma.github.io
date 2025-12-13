@@ -72,7 +72,6 @@ defaults:
     values:
       tags: ["Other"]
 
-
 exclude:
   - vendor/
   - Gemfile
