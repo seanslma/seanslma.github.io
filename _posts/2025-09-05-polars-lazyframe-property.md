@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Polars"]
+categories: ["Python", "Polars", "LazyFrame"]
 ---
 
 # Polars LazyFrame properties are expensive operations

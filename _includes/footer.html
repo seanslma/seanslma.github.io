@@ -140,6 +140,25 @@
       gap: 16px; /* If this fails on old iOS, use margin-right for .footer-right ul li */
     }
   }
+
+  .post-footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+  }
+
+  .post-footer .back-to-top {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+
+  .post-footer .back-to-top:hover {
+    text-decoration: underline;
+  }
 </style>
 
 <footer class="site-footer h-card">
@@ -182,6 +201,6 @@
       </div>
     </div>
 
-    <p>© 2025 {{ site.author }} - {{ site.title }}</p>
+    <p>© {{ site.copyright_year }}  {{ site.author }} - {{ site.title }}</p>
   </div>
 </footer>

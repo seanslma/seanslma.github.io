@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Polars"]
+categories: ["Python", "Polars", "NULL"]
 ---
 
 # Polars null operations

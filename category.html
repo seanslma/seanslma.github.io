@@ -1,0 +1,93 @@
+---
+layout: page
+title: Categories
+permalink: /category/
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/category.css' | relative_url }}">
+
+<div class="categories-page">
+
+  <!-- Category Navigation Menu -->
+  <div class="category-navigation">
+    <ul class="parent-nav-list">
+      {% assign parent_categories = "" | split: "" %}
+
+      {% comment %} Collect all parent categories (first item in array) {% endcomment %}
+      {% for post in site.posts %}
+        {% if post.categories.size >= 2 %}
+          {% assign parent = post.categories[0] %}
+          {% unless parent_categories contains parent %}
+            {% assign parent_categories = parent_categories | push: parent %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign sorted_parents = parent_categories | sort %}
+
+      {% for parent in sorted_parents %}
+        <li><a href="#{{ parent | slugify }}" class="parent-nav-link">{{ parent }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <hr class="nav-divider">
+
+  <!-- Category Sections -->
+  {% for parent in sorted_parents %}
+    <div class="parent-section" id="{{ parent | slugify }}">
+      <h2 class="parent-category">{{ parent }}</h2>
+
+      {% comment %} Get all child categories (second item in array) for this parent {% endcomment %}
+      {% assign children = "" | split: "" %}
+      {% for post in site.posts %}
+        {% if post.categories.size >= 2 and post.categories[0] == parent %}
+          {% assign child = post.categories[1] %}
+          {% unless children contains child %}
+            {% assign children = children | push: child %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign sorted_children = children | sort %}
+
+      {% for child in sorted_children %}
+        <h3 class="child-category" id="{{ parent | slugify }}-{{ child | slugify }}">{{ child }}</h3>
+        <ul class="post-list">
+          {% for post in site.posts %}
+            {% if post.categories.size >= 2 and post.categories[0] == parent and post.categories[1] == child %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                {% if post.categories.size > 2 %}
+                  <span class="extra-categories">
+                    ({% for cat in post.categories offset:2 %}{{ cat }}{% unless forloop.last %}, {% endunless %}{% endfor %})
+                  </span>
+                {% endif %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endfor %}
+
+      <!-- Back to top link -->
+      <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="back-to-top">↑ Back to top</a>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+</script>

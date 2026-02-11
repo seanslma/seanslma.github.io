@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Pandas"]
+categories: ["Python", "Pandas", "Performance"]
 ---
 
 # Reduce a python app run time from two hours to 20 seconds

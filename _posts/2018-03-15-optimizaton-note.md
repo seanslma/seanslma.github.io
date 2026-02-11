@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Optimzation"]
+categories: ["Optimization", "Solver", "Shadow Price"]
 ---
 
 # Random notes on optimization

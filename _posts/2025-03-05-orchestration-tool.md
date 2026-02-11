@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Orchestration"]
+categories: ["DevOps", "Orchestration"]
 ---
 
 # Which orchestration tool is better: Airflow, Prefect, Argo Workflows, or Temporal?

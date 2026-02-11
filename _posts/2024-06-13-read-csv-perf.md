@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "CSV"]
+categories: ["Python", "IO", "Performance"]
 ---
 
 # Read CSV files 10x to 40x faster using pyarrow and polars

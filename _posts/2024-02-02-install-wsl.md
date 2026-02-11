@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Windows", "WSL"]
+categories: ["Windows", "WSL"]
 ---
 
 # How to install and setup WSL on Windows

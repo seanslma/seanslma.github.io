@@ -54,18 +54,8 @@ layout: base
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 
-   <!-- Page View Counter -->
-   <script>
-    // Fetch current page count from Counter.dev API
-    fetch(`https://counter.dev/track?json=1&href=${encodeURIComponent(window.location.href)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.views !== undefined) {
-          document.getElementById('counterdev_pageviews').textContent = data.views;
-        }
-      })
-      .catch(() => {
-        document.getElementById('counterdev_pageviews').textContent = '–';
-      });
-  </script>
+  <!-- Back to top link -->
+  <div class="post-footer">
+    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="back-to-top">↑ Back to top</a>
+  </div>
 </article>

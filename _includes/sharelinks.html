@@ -9,17 +9,32 @@
     font-size: 14px;
   }
 
-  .post-views {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: #888;
-    font-weight: 500;
+  .post-categories {
+    display: inline-block;
+    margin-right: 20px;
   }
 
-  /* .views-label::before {
-    content: "👁 ";
-  } */
+  .categories-label {
+    font-weight: bold;
+    color: #666;
+    margin-right: 5px;
+  }
+
+  .category-link {
+    color: #0366d6;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .category-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+
+  .no-categories {
+    color: #999;
+    font-style: italic;
+  }
 
   .share-container {
     display: flex;
@@ -59,9 +74,19 @@
 {% assign safetitlepre = "[Blog] " | append: page.author | append: " - " | url_encode %}
 
 <div class="meta-bar">
-  <div class="post-views">
-    <span class="views-label">Views:</span>
-    <span id="counterdev_pageviews">...</span>
+  <div class="post-categories">
+    <span class="categories-label">Categories:</span>
+    {% if page.categories and page.categories.size >= 2 %}
+      {% assign parent = page.categories[0] %}
+      {% assign child = page.categories[1] %}
+      <a href="{{ site.baseurl }}/category/#{{ parent | slugify }}-{{ child | slugify }}" class="category-link">
+        {% for category in page.categories %}{{ category }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+      </a>
+    {% elsif page.categories %}
+      <span class="no-categories">{{ page.categories | join: ", " }}</span>
+    {% else %}
+      <span class="no-categories">Uncategorized</span>
+    {% endif %}
   </div>
   <div class="share-container">
   <span class="share-label" style="color: silver;">Share on: </span><div id="share-buttons">

@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Feature Selection"]
+categories: ["ML", "Feature Selection"]
 ---
 
 # Improve VarianceThreshold performance in ML feature selection

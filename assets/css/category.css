@@ -1,0 +1,133 @@
+.categories-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Navigation Menu at Top */
+  .category-navigation {
+    background-color: #f8f9fa;
+    padding: 0.5em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+
+  .category-navigation h3 {
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+    color: #2c3e50;
+    font-size: 1.2em;
+  }
+
+  .parent-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .parent-nav-list li {
+    display: inline-block;
+  }
+
+  .parent-nav-link {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+
+  .parent-nav-link:hover {
+    background-color: #2980b9;
+  }
+
+  .nav-divider {
+    margin: 2em 0;
+    border: none;
+    border-top: 2px solid #e0e0e0;
+  }
+
+  /* Parent Category Sections */
+  .parent-section {
+    margin-bottom: 2em;
+    scroll-margin-top: 20px; /* Offset for smooth scroll */
+  }
+
+  .parent-category {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-top: 0 !important;
+    margin-bottom: 0.7em !important;
+    padding-bottom: 0.3em;
+    padding-top: 0 !important;
+    border-bottom: 2px solid #3498db;
+  }
+
+  .child-category {
+    color: #34495e;
+    font-size: 1.3em;
+    margin-top: 0.5em !important;
+    margin-bottom: 0.2em !important;
+    padding-top: 0 !important;
+    margin-left: 1em;
+  }
+
+  .post-list {
+    list-style: none;
+    padding-left: 2em;
+    margin-bottom: 0.1em;
+  }
+
+  .post-list li {
+    margin-bottom: 0.2em;
+    padding: 0.1em 0;
+  }
+
+  .post-list a {
+    color: #0366d6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .post-list a:hover {
+    text-decoration: underline;
+  }
+
+  .post-date {
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 0.5em;
+  }
+
+  /* Back to Top Link */
+  .back-to-top {
+    display: inline-block;
+    margin-top: 1em;
+    margin-left: 1em;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+
+  .back-to-top:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .parent-nav-list {
+      flex-direction: column;
+      gap: 0.5em;
+    }
+
+    .parent-nav-link {
+      display: block;
+      text-align: center;
+    }
+  }

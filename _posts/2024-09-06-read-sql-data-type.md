@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: ["Python", "SQL", "Data Type"]
 tags: ["Python", "Pandas"]
 ---
 

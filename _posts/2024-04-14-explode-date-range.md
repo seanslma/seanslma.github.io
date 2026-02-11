@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Pandas"]
+categories: ["Python", "Pandas", "Performance"]
 ---
 
 # Explode date ranges in a pandas DataFrame 30x faster

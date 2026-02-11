@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Pandas"]
+categories: ["Python", "Pandas", "Data"]
 ---
 
 # How to create dummy pandas DataFrames for testing
@@ -24,7 +24,6 @@ random_string = ''.join(random.choices(characters, k=string_length))
 ```
 
 We can then use a list comprehension or a for loop to create a list of random strings. An alternative way is using `numpy` for generating random numbers and selecting the characters.
-
 
 ## Creating a datetime list
 Assume we will create a datetime range for one year with a resolution unit of second.

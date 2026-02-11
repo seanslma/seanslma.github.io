@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Gurobi"]
+categories: ["Python", "Optimization", "Gurobi"]
 ---
 
 # Using Gurobi Python matrix API to reduce problem creation time

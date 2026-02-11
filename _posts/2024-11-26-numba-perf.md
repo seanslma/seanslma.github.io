@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: ["Python", "Numba"]
+categories: ["Python", "Numba", "Performance"]
 ---
 
 # Make python loops 5x to 10x faster using numba
