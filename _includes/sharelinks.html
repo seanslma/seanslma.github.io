@@ -3,6 +3,8 @@
     display: flex;
     justify-content: space-between; /* left: views, right: share icons */
     align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;                       /* spacing when wrapped */
     margin-top: 12px;
     border-top: 1px solid #eaeaea;
     padding-top: 6px;
@@ -41,17 +43,16 @@
     justify-content: flex-end;   /* align everything to the right */
     align-items: center;         /* vertical centering */
     gap: 4px;                    /* space between "Share on:" and icons */
+    margin-left: auto;           /* pushes share to the right when wrapped */
   }
 
   .share-label {
-    color: silver;
+    color: rgba(125, 125, 125, 0.062);
     font-size: 14px;
   }
 
-  /* #share-buttons {display: inline-block; vertical-align: middle;} */
   #share-buttons {display: flex; gap: 0px;}
   #share-buttons:after {content: ""; display: block; clear: both;}
-  /* #share-buttons > div {position: relative; text-align: left; height: 36px; width: 32px; float: left; text-align: center;} */
   #share-buttons > div {height: 36px; width: 32px; text-align: center;}
   #share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
   #share-buttons > div:hover {cursor: pointer;}
