@@ -1,0 +1,22 @@
+/* Force line break before ALL parameters including the first */
+dt.sig.sig-object em.sig-param::before {
+    content: "\A    ";
+    white-space: pre;
+}
+
+/* Ensure commas stay inline */
+dt.sig.sig-object .w {
+    display: inline;
+}
+
+/* Add comma after last parameter and force line break after it */
+dt.sig.sig-object em.sig-param:last-of-type::after {
+    content: ",\A";
+    white-space: pre;
+}
+
+/* Alternative: target the closing parenthesis directly */
+dt.sig.sig-object span.sig-paren:last-of-type::before {
+    content: "\A";
+    white-space: pre;
+}

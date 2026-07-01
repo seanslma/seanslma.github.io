@@ -11,6 +11,7 @@
 ## My github links
 - [My blog repo](https://github.com/seanslma/seanslma.github.io)
 - [My learning notes](https://github.com/seanslma/maki)
+- [My python utils](https://github.com/seanslma/mapu)
 - [My jupyter notebooks](https://github.com/seanslma/manb)
 - [My rust-python examples](https://github.com/seanslma/mars)
 
