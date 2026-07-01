@@ -41,6 +41,12 @@ jobs:
           echo "Maki folder copied to _site"
           ls -la _site/maki/
 
+      - name: Copy mapu folder to _site
+        run: |
+          cp -r mapu _site/mapu
+          echo "Mapu folder copied to _site"
+          ls -la _site/mapu/
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
