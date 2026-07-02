@@ -82,7 +82,11 @@ defaults:
     values:
       tags: ["Other"]
 
+# Ignore these files or directories completely when building the site
+# Excluded files are not copied to _site and are not processed by Jekyll
+# So it won't delete the underscore folders in mapu
 exclude:
+  - mapu/
   - vendor/
   - Gemfile
   - Gemfile.lock
