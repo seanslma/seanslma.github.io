@@ -46,12 +46,18 @@ jobs:
           cp -r mapu _site/mapu
           echo "Mapu folder copied to _site"
           ls -la _site/mapu/
-          
+          touch _site/mapu/.nojekyll
+          touch _site/.nojekyll          
+
+      - name: Debug _site before upload
+        run: |
+          echo "=== _site/mapu/api contents ==="
+          ls -la _site/mapu/api/
+          echo "=== checking _static ==="
+          ls -la _site/mapu/api/_static/ || echo "_static NOT FOUND"
+    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: "_site"
-          jekyll: false
           
   deploy:
     environment:
