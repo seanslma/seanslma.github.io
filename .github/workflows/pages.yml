@@ -49,7 +49,10 @@ jobs:
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-
+        with:
+          path: "_site"
+          jekyll: false
+          
   deploy:
     environment:
       name: github-pages
