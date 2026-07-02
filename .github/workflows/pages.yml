@@ -37,17 +37,17 @@ jobs:
 
       - name: Copy maki folder to _site
         run: |
-          cp -r maki _site/maki
+          mkdir -p _site/maki
+          cp -r maki/* _site/maki/
           echo "Maki folder copied to _site"
           ls -la _site/maki/
 
       - name: Copy mapu folder to _site
         run: |
-          cp -r mapu _site/mapu
+          mkdir -p _site/mapu
+          cp -r mapu/* _site/mapu/
           echo "Mapu folder copied to _site"
-          ls -la _site/mapu/
-          touch _site/mapu/.nojekyll
-          touch _site/.nojekyll          
+          ls -la _site/mapu/          
 
       - name: Debug _site before upload
         run: |
