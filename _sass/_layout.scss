@@ -12,23 +12,20 @@
   }
 
   .site-title {
-    @include relative-font-size(1.5);
-    font-weight: 300;
-    font-family: 'Kaushan Script', cursive;
-    color: #2a7ae2;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-    letter-spacing: -1px;
+    @include relative-font-size(1.1); /* Stepped down slightly for balance */
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 400; /* Crisp, readable, non-italic */
+    font-style: normal;
+    color: #1e293b; /* Deep slate instead of bright default blue */
+    letter-spacing: 0;
     margin-bottom: 0;
-    float: left;
 
-    @include media-query($on-palm) {
-      padding-right: 45px;
-    }
+    /* Let Flexbox handle layout instead of float */
+    float: none;
 
-    &,
-    &:visited {
-      color: $site-title-color;
-    }
+    //   @include media-query($on-palm) {
+    //     padding-right: 45px;
+    //   }
   }
 
   .site-nav {
@@ -264,7 +261,7 @@
 
   .post-title,
   .post-content h1 {
-    margin-bottom: 10px;
+    margin-bottom: 24px;
     @include relative-font-size(2.25);      /* 2.25 */
     font-weight: $base-font-weight * 1.25;  /* 1.25 */
     letter-spacing: -1px;

@@ -2,9 +2,9 @@ url: "https://seanslma.github.io"
 baseurl: ""
 permalink: /:title/ # default: /:year/:month/:day/:title/
 
-title: "Learning Faster Python Fast"
+title: "Python · DevOps · Data · Energy Markets"
 author: "Sean Ma"
-description: "Sean's Blogs" # This will show up in places like twitter, linkedin, etc, if share sites url as a post.
+description: "Notes and utilities on Python, DevOps, data, and energy markets by Sean Ma." # This will show up in places like twitter, linkedin, etc, if share sites url as a post.
 copyright_year: "2026"
 
 # Email / Social media user names used by the minima theme:
@@ -58,24 +58,7 @@ titles_from_headings:
   strip_title: true
   collections: true
 
-# Tell Jekyll to actually look at the underscore folder
-# include: only works for TOP-LEVEL underscore folders (e.g. _maki/)
-# It does NOT recursively include nested underscore folders like maki/api/_static
-# include:
-#   - maki/ # does not work
-
-# keep_files: only protects files Jekyll ITSELF generated in a previous build
-# It does NOT protect source underscore folders from being dropped during processing
-# keep_files:
-#   - maki # not working
-
-# Prevent Jekyll from processing files in maki
-# by setting default layout to null for everything in maki
 defaults:
-  # - scope:
-  #     path: "maki"
-  #   values:
-  #     layout: null # does not work
   - scope:
       path: "blog"
       type: posts
@@ -96,7 +79,7 @@ exclude:
   - LICENSE
 
 header_pages:
-  - index.md
+  # - index.md
   - maki.md
   - mapu.md
   - blog.md

@@ -1,4 +1,4 @@
 Gemfile.lock
-vendor/
+/vendor/
 .bundle/
 _site/

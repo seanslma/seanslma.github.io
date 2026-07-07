@@ -1,4 +1,10 @@
-# About
+# Sean Ma, PhD
+
+This website records all the problems I encountered and the correct solutions I found, in `Programming` (mainly `Python`), `DevOps`, `Data Analysis and Visualization`, as well as `Energy Markets`:
+
+- [maki](/maki/): Notes and tips from programming to energy markets and optimization.
+- [mapu](/mapu/): Python utils that either bring convenience or provide excellent performance.
+- [blogs](/blog/): Selected topics demonstrating how to solve problems.
 
 ## Who am I?
 - Energy market modeller
@@ -7,6 +13,7 @@
 - Database maintainer
 - DevOps practitioner
 - ML learner
+- Most importantly, a problem solver
 
 ## My github links
 - [My blog repo](https://github.com/seanslma/seanslma.github.io)
