@@ -2,7 +2,7 @@ url: "https://seanslma.github.io"
 baseurl: ""
 permalink: /:title/ # default: /:year/:month/:day/:title/
 
-title: "Python · DevOps · Data · Energy Markets"
+title: "Python · DevOps · Data · Energy"
 author: "Sean Ma"
 description: "Notes and utilities on Python, DevOps, data, and energy markets by Sean Ma." # This will show up in places like twitter, linkedin, etc, if share sites url as a post.
 copyright_year: "2026"
