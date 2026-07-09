@@ -111,9 +111,11 @@
       .nav-item {
         display: block;
         padding: 5px 0;
-        margin-right: 0;
         color: $text-color;
         line-height: $base-line-height;
+        &:not(:last-child) {
+          margin-right: 0;
+        }
       }
     }
   }
