@@ -67,9 +67,9 @@ defaults:
 
 # Ignore these files or directories completely when building the site
 # Excluded files are not copied to _site and are not processed by Jekyll
-# So it won't delete the underscore folders in mapu
+# So it won't delete the underscore folders in mspu
 exclude:
-  - mapu/
+  - mspu/
   - vendor/
   - Gemfile
   - Gemfile.lock
@@ -81,7 +81,7 @@ exclude:
 header_pages:
   # - index.md
   - maki.md
-  - mapu.md
+  - mspu.md
   - blog.md
 
 counter_analytics: true
