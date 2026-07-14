@@ -40,21 +40,14 @@ jobs:
           mkdir -p _site/maki
           cp -r maki/* _site/maki/
           echo "Maki folder copied to _site"
-          ls -la _site/maki/
+          # ls -la _site/maki/
 
-      - name: Copy mapu folder to _site
+      - name: Copy mspu folder to _site
         run: |
-          mkdir -p _site/mapu
-          cp -r mapu/* _site/mapu/
-          echo "Mapu folder copied to _site"
-          ls -la _site/mapu/          
-
-      - name: Debug _site before upload
-        run: |
-          echo "=== _site/mapu/api contents ==="
-          ls -la _site/mapu/api/
-          echo "=== checking _static ==="
-          ls -la _site/mapu/api/_static/ || echo "_static NOT FOUND"
+          mkdir -p _site/mspu
+          cp -r mspu/* _site/mspu/
+          echo "Mspu folder copied to _site"
+          # ls -la _site/mspu/          
     
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
