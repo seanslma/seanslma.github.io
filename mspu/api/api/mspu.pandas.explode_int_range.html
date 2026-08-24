@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mspu.pandas.pa_mod &#8212; mspu 0.0.2 documentation</title>
+    <title>mspu.pandas.explode_int_range &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -47,11 +47,11 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=ccdb6887"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.pandas.pa_mod';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.pandas.explode_int_range';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="polars" href="../polars.html" />
-    <link rel="prev" title="mspu.pandas.explode_int_range" href="mspu.pandas.explode_int_range.html" />
+    <link rel="next" title="mspu.pandas.pa_mod" href="mspu.pandas.pa_mod.html" />
+    <link rel="prev" title="mspu.pandas.explode_date_range" href="mspu.pandas.explode_date_range.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -322,8 +322,8 @@
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.df_diffs.html">mspu.pandas.df_diffs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.create_empty_df.html">mspu.pandas.create_empty_df</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_date_range.html">mspu.pandas.explode_date_range</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_int_range.html">mspu.pandas.explode_int_range</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.pandas.pa_mod</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.pandas.explode_int_range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.pa_mod.html">mspu.pandas.pa_mod</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../polars.html">polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -381,7 +381,7 @@
     
     <li class="breadcrumb-item"><a href="../pandas.html" class="nav-link">pandas</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.pandas.pa_mod</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.pandas.explode_int_range</span></li>
   </ul>
 </nav>
 </div>
@@ -398,28 +398,69 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mspu-pandas-pa-mod">
-<h1>mspu.pandas.pa_mod<a class="headerlink" href="#mspu-pandas-pa-mod" title="Link to this heading">#</a></h1>
+  <section id="mspu-pandas-explode-int-range">
+<h1>mspu.pandas.explode_int_range<a class="headerlink" href="#mspu-pandas-explode-int-range" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="mspu.pandas.pa_mod">
-<span class="sig-prename descclassname"><span class="pre">mspu.pandas.</span></span><span class="sig-name descname"><span class="pre">pa_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/mspu/pandas/parquet.html#pa_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.pandas.pa_mod" title="Link to this definition">#</a></dt>
-<dd><p>Calculates remainder after division by a positive divisor.</p>
+<dt class="sig sig-object py" id="mspu.pandas.explode_int_range">
+<span class="sig-prename descclassname"><span class="pre">mspu.pandas.</span></span><span class="sig-name descname"><span class="pre">explode_int_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclusive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'both'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'left'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'right'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'neither'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'both'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_range_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/mspu/pandas/utils.html#explode_int_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.pandas.explode_int_range" title="Link to this definition">#</a></dt>
+<dd><p>Explodes a DataFrame with integer ranges into individual rows.</p>
+<p>Index is ignored, and a new index is created.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>ds: int | pd.Series</strong></dt><dd><p>An integer value or a pd.Series with int64[pyarrow] dtype</p>
+<dt><strong>df</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>The input DataFrame containing the integer ranges.</p>
 </dd>
-<dt><strong>divisor: int</strong></dt><dd><p>The positive divisor for the modulo operation</p>
+<dt><strong>start_col</strong><span class="classifier">str</span></dt><dd><p>The name of the column representing the start of the range.</p>
+</dd>
+<dt><strong>end_col</strong><span class="classifier">str</span></dt><dd><p>The name of the column representing the end of the range.</p>
+</dd>
+<dt><strong>col</strong><span class="classifier">str</span></dt><dd><p>The name of the new column that will contain the exploded values.</p>
+</dd>
+<dt><strong>step</strong><span class="classifier">int, optional</span></dt><dd><p>The step size for the range. Default is 1.</p>
+</dd>
+<dt><strong>min_val</strong><span class="classifier">int, optional</span></dt><dd><p>The minimum value to limit the start of the range. If None, no limit is applied.</p>
+</dd>
+<dt><strong>max_val</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum value to limit the end of the range. If None, no limit is applied.</p>
+</dd>
+<dt><strong>inclusive</strong><span class="classifier">{‘both’, ‘left’, ‘right’, ‘neither’}, optional</span></dt><dd><p>Specifies whether to include the start and/or end values in the exploded range.
+Default is ‘both’.</p>
+</dd>
+<dt><strong>drop_range_cols</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to drop the start_col and end_col from the resulting DataFrame.
+Default is True.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>int | pd.Series:</dt><dd><p>An integer or pd.series containing the modulo results</p>
+<dt>pd.DataFrame</dt><dd><p>A new DataFrame with the exploded integer ranges.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mspu.pandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">explode_int_range</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;start_year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">2026</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;end_year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">2029</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d1</span> <span class="o">=</span> <span class="n">explode_int_range</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">start_col</span><span class="o">=</span><span class="s1">&#39;start_year&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">end_col</span><span class="o">=</span><span class="s1">&#39;end_year&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">inclusive</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_val</span><span class="o">=</span><span class="mi">2028</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d1</span><span class="o">.</span><span class="n">ht</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">shape: (3, 2)</span>
+<span class="go">project  year</span>
+<span class="go">0       a  2024</span>
+<span class="go">1       b  2026</span>
+<span class="go">1       b  2027</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -435,20 +476,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="mspu.pandas.explode_int_range.html"
+       href="mspu.pandas.explode_date_range.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">mspu.pandas.explode_int_range</p>
+        <p class="prev-next-title">mspu.pandas.explode_date_range</p>
       </div>
     </a>
     <a class="right-next"
-       href="../polars.html"
+       href="mspu.pandas.pa_mod.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">polars</p>
+        <p class="prev-next-title">mspu.pandas.pa_mod</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -4,6 +4,9 @@ categories: ["Python", "Pandas", "Data"]
 ---
 
 # How to create dummy pandas DataFrames for testing
+
+Update 2026–07–14: The `gen_rand_df` function is now available from the `mspu` python package. See the [document](https://seanslma.github.io/mspu/api/mspu.html) for more details.
+
 When working with Pandas in Python, constantly we need some DataFrames for different purposes, such as testing Python code to check errors and benchmarking code performance.
 
 Here I will explain how to create dummy pandas DataFrames with the help of AI. At the end, I will put the code for generating different data type columns together so we can use it everywhere to create DataFrames when needed.

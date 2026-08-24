@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mspu.pandas.pa_mod &#8212; mspu 0.0.2 documentation</title>
+    <title>mspu.polars.PlHt &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -47,11 +47,11 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=ccdb6887"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.pandas.pa_mod';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.polars.PlHt';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="polars" href="../polars.html" />
-    <link rel="prev" title="mspu.pandas.explode_int_range" href="mspu.pandas.explode_int_range.html" />
+    <link rel="next" title="mspu.polars.inf_count" href="mspu.polars.inf_count.html" />
+    <link rel="prev" title="polars" href="../polars.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -317,17 +317,17 @@
 <li class="toctree-l2"><a class="reference internal" href="mspu.data.gen_rand_df.html">mspu.data.gen_rand_df</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">pandas</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas.html">pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.PdHt.html">mspu.pandas.PdHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.df_diffs.html">mspu.pandas.df_diffs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.create_empty_df.html">mspu.pandas.create_empty_df</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_date_range.html">mspu.pandas.explode_date_range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_int_range.html">mspu.pandas.explode_int_range</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.pandas.pa_mod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.pa_mod.html">mspu.pandas.pa_mod</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../polars.html">polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mspu.polars.PlHt.html">mspu.polars.PlHt</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../polars.html">polars</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.polars.PlHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.inf_count.html">mspu.polars.inf_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.nan_count.html">mspu.polars.nan_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.nul_count.html">mspu.polars.nul_count</a></li>
@@ -379,9 +379,9 @@
     <li class="breadcrumb-item"><a href="../mspu.html" class="nav-link">mspu</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../pandas.html" class="nav-link">pandas</a></li>
+    <li class="breadcrumb-item"><a href="../polars.html" class="nav-link">polars</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.pandas.pa_mod</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.polars.PlHt</span></li>
   </ul>
 </nav>
 </div>
@@ -398,28 +398,77 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mspu-pandas-pa-mod">
-<h1>mspu.pandas.pa_mod<a class="headerlink" href="#mspu-pandas-pa-mod" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="mspu.pandas.pa_mod">
-<span class="sig-prename descclassname"><span class="pre">mspu.pandas.</span></span><span class="sig-name descname"><span class="pre">pa_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/mspu/pandas/parquet.html#pa_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.pandas.pa_mod" title="Link to this definition">#</a></dt>
-<dd><p>Calculates remainder after division by a positive divisor.</p>
+  <section id="mspu-polars-plht">
+<h1>mspu.polars.PlHt<a class="headerlink" href="#mspu-polars-plht" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mspu.polars.PlHt">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mspu.polars.</span></span><span class="sig-name descname"><span class="pre">PlHt</span></span><a class="reference internal" href="../_modules/mspu/polars/utils.html#PlHt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.polars.PlHt" title="Link to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mspu.polars.PlHt.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/mspu/polars/utils.html#PlHt.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.polars.PlHt.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mspu.polars.PlHt.__init__" title="mspu.polars.PlHt.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(df)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mspu.polars.PlHt.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/mspu/polars/utils.html#PlHt.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.polars.PlHt.__call__" title="Link to this definition">#</a></dt>
+<dd><p>Polars head and tail in one command <cite>ht</cite>, with optional rounding.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>ds: int | pd.Series</strong></dt><dd><p>An integer value or a pd.Series with int64[pyarrow] dtype</p>
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>Number of rows to show from the head and tail. If n &lt; 0 or n is greater than
+half the number of rows, the entire DataFrame will be shown.</p>
 </dd>
-<dt><strong>divisor: int</strong></dt><dd><p>The positive divisor for the modulo operation</p>
+<dt><strong>c</strong><span class="classifier">int</span></dt><dd><p>Number of columns to show. If None or greater than the number of columns,
+all columns will be shown.</p>
+</dd>
+<dt><strong>w</strong><span class="classifier">int</span></dt><dd><p>Width of the output in characters. If None, the width will be determined.</p>
+</dd>
+<dt><strong>cw</strong><span class="classifier">int</span></dt><dd><p>Column width in characters. If None, the column width will be determined.</p>
+</dd>
+<dt><strong>r</strong><span class="classifier">int</span></dt><dd><p>Number of decimal places to round float and decimal columns. If None or negative,
+no rounding will be applied.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">bool</span></dt><dd><p>If True, transpose the DataFrame before displaying.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>int | pd.Series:</dt><dd><p>An integer or pd.series containing the modulo results</p>
-</dd>
+<dt>None</dt><dd></dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mspu.polars</span> <span class="c1"># register `PlHt` as Polars DataFrame namespace `ht`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>  <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.12345</span><span class="p">,</span> <span class="mf">2.98765</span><span class="p">,</span> <span class="mf">3.14159</span><span class="p">],</span>
+<span class="gp">... </span>  <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="gp">... </span>  <span class="s1">&#39;ham&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">ht</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">shape: (3, 3)</span>
+<span class="go">┌──────┬───┬─────┐</span>
+<span class="go">│ foo  ┆ … ┆ ham │</span>
+<span class="go">│ ---  ┆   ┆ --- │</span>
+<span class="go">│ f64  ┆   ┆ str │</span>
+<span class="go">╞══════╪═══╪═════╡</span>
+<span class="go">│ 1.12 ┆ … ┆ x   │</span>
+<span class="go">│ 3.14 ┆ … ┆ z   │</span>
+<span class="go">└──────┴───┴─────┘</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -435,20 +484,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="mspu.pandas.explode_int_range.html"
+       href="../polars.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">mspu.pandas.explode_int_range</p>
+        <p class="prev-next-title">polars</p>
       </div>
     </a>
     <a class="right-next"
-       href="../polars.html"
+       href="mspu.polars.inf_count.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">polars</p>
+        <p class="prev-next-title">mspu.polars.inf_count</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

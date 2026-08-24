@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mspu.pandas.pa_mod &#8212; mspu 0.0.2 documentation</title>
+    <title>mspu.pandas.create_empty_df &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -47,11 +47,11 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=ccdb6887"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.pandas.pa_mod';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/mspu.pandas.create_empty_df';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="polars" href="../polars.html" />
-    <link rel="prev" title="mspu.pandas.explode_int_range" href="mspu.pandas.explode_int_range.html" />
+    <link rel="next" title="mspu.pandas.explode_date_range" href="mspu.pandas.explode_date_range.html" />
+    <link rel="prev" title="mspu.pandas.df_diffs" href="mspu.pandas.df_diffs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -320,10 +320,10 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">pandas</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.PdHt.html">mspu.pandas.PdHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.df_diffs.html">mspu.pandas.df_diffs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.create_empty_df.html">mspu.pandas.create_empty_df</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.pandas.create_empty_df</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_date_range.html">mspu.pandas.explode_date_range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_int_range.html">mspu.pandas.explode_int_range</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">mspu.pandas.pa_mod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.pa_mod.html">mspu.pandas.pa_mod</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../polars.html">polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -381,7 +381,7 @@
     
     <li class="breadcrumb-item"><a href="../pandas.html" class="nav-link">pandas</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.pandas.pa_mod</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">mspu.pandas.create_empty_df</span></li>
   </ul>
 </nav>
 </div>
@@ -398,24 +398,24 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mspu-pandas-pa-mod">
-<h1>mspu.pandas.pa_mod<a class="headerlink" href="#mspu-pandas-pa-mod" title="Link to this heading">#</a></h1>
+  <section id="mspu-pandas-create-empty-df">
+<h1>mspu.pandas.create_empty_df<a class="headerlink" href="#mspu-pandas-create-empty-df" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="mspu.pandas.pa_mod">
-<span class="sig-prename descclassname"><span class="pre">mspu.pandas.</span></span><span class="sig-name descname"><span class="pre">pa_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/mspu/pandas/parquet.html#pa_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.pandas.pa_mod" title="Link to this definition">#</a></dt>
-<dd><p>Calculates remainder after division by a positive divisor.</p>
+<dt class="sig sig-object py" id="mspu.pandas.create_empty_df">
+<span class="sig-prename descclassname"><span class="pre">mspu.pandas.</span></span><span class="sig-name descname"><span class="pre">create_empty_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/mspu/pandas/utils.html#create_empty_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mspu.pandas.create_empty_df" title="Link to this definition">#</a></dt>
+<dd><p>Create an empty df with specified index and column types.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>ds: int | pd.Series</strong></dt><dd><p>An integer value or a pd.Series with int64[pyarrow] dtype</p>
+<dt><strong>col_types</strong><span class="classifier">dict[str, str]</span></dt><dd><p>Column name and type.</p>
 </dd>
-<dt><strong>divisor: int</strong></dt><dd><p>The positive divisor for the modulo operation</p>
+<dt><strong>ind_types</strong><span class="classifier">dict[str, str], optional</span></dt><dd><p>Index level name and type.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>int | pd.Series:</dt><dd><p>An integer or pd.series containing the modulo results</p>
+<dt>pd.DataFrame</dt><dd><p>An empty DataFrame with the specified index and column types.</p>
 </dd>
 </dl>
 </dd>
@@ -435,20 +435,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="mspu.pandas.explode_int_range.html"
+       href="mspu.pandas.df_diffs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">mspu.pandas.explode_int_range</p>
+        <p class="prev-next-title">mspu.pandas.df_diffs</p>
       </div>
     </a>
     <a class="right-next"
-       href="../polars.html"
+       href="mspu.pandas.explode_date_range.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">polars</p>
+        <p class="prev-next-title">mspu.pandas.explode_date_range</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

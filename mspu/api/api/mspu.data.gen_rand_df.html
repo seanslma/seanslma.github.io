@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>mspu.data.gen_rand_df &#8212; mspu 0.0.1 documentation</title>
+    <title>mspu.data.gen_rand_df &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=5aa371e9"></script>
+    <script src="../_static/documentation_options.js?v=f7f30125"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -116,7 +116,7 @@
   
   
   
-    <p class="title logo__title">mspu 0.0.1 documentation</p>
+    <p class="title logo__title">mspu 0.0.2 documentation</p>
   
 </a></div>
     
@@ -318,14 +318,16 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../pandas.html">pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.pd_ht.html">mspu.pandas.pd_ht</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.PdHt.html">mspu.pandas.PdHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.df_diffs.html">mspu.pandas.df_diffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.create_empty_df.html">mspu.pandas.create_empty_df</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_date_range.html">mspu.pandas.explode_date_range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.pandas.explode_int_range.html">mspu.pandas.explode_int_range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.pandas.pa_mod.html">mspu.pandas.pa_mod</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../polars.html">polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="mspu.polars.pl_ht.html">mspu.polars.pl_ht</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mspu.polars.PlHt.html">mspu.polars.PlHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.inf_count.html">mspu.polars.inf_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.nan_count.html">mspu.polars.nan_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mspu.polars.nul_count.html">mspu.polars.nul_count</a></li>
@@ -467,9 +469,8 @@ is provided, it should include the following keys:</p>
 <p class="rubric">Examples</p>
 <p>Simply specify the number of columns for each type.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mspu.pandas</span>  <span class="c1"># register DataFrame accessor `ht`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mspu.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_rand_df</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mspu.pandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">pd_ht</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">ht</span> <span class="o">=</span> <span class="n">pd_ht</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">gen_rand_df</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">nrow</span><span class="o">=</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">str_cols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -488,9 +489,8 @@ is provided, it should include the following keys:</p>
 </div>
 <p>Provide detailed parameters for each column type.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mspu.pandas</span>  <span class="c1"># register DataFrame accessor `ht`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mspu.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">gen_rand_df</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mspu.pandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">pd_ht</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">ht</span> <span class="o">=</span> <span class="n">pd_ht</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">gen_rand_df</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">nrow</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">str_cols</span><span class="o">=</span><span class="p">{</span>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pandas &#8212; mspu 0.0.1 documentation</title>
+    <title>pandas &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=5aa371e9"></script>
+    <script src="_static/documentation_options.js?v=f7f30125"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'pandas';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mspu.pandas.pd_ht" href="api/mspu.pandas.pd_ht.html" />
+    <link rel="next" title="mspu.pandas.PdHt" href="api/mspu.pandas.PdHt.html" />
     <link rel="prev" title="mspu.data.gen_rand_df" href="api/mspu.data.gen_rand_df.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -116,7 +116,7 @@
   
   
   
-    <p class="title logo__title">mspu 0.0.1 documentation</p>
+    <p class="title logo__title">mspu 0.0.2 documentation</p>
   
 </a></div>
     
@@ -318,14 +318,16 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">pandas</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.pd_ht.html">mspu.pandas.pd_ht</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.PdHt.html">mspu.pandas.PdHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.df_diffs.html">mspu.pandas.df_diffs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.create_empty_df.html">mspu.pandas.create_empty_df</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.explode_date_range.html">mspu.pandas.explode_date_range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.explode_int_range.html">mspu.pandas.explode_int_range</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.pandas.pa_mod.html">mspu.pandas.pa_mod</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="polars.html">polars</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/mspu.polars.pl_ht.html">mspu.polars.pl_ht</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/mspu.polars.PlHt.html">mspu.polars.PlHt</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.polars.inf_count.html">mspu.polars.inf_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.polars.nan_count.html">mspu.polars.nan_count</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/mspu.polars.nul_count.html">mspu.polars.nul_count</a></li>
@@ -395,20 +397,39 @@
                   
   <section id="pandas">
 <span id="api-pandas"></span><h1>pandas<a class="headerlink" href="#pandas" title="Link to this heading">#</a></h1>
+<section id="accessors">
+<h2>Accessors<a class="headerlink" href="#accessors" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/mspu.pandas.PdHt.html#mspu.pandas.PdHt" title="mspu.pandas.PdHt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdHt</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Registered as <code class="docutils literal notranslate"><span class="pre">df.ht(...)</span></code> on any <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>
+via <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.api.extensions.register_dataframe_accessor()</span></code>.</p>
+</div>
+</section>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/mspu.pandas.pd_ht.html#mspu.pandas.pd_ht" title="mspu.pandas.pd_ht"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd_ht</span></code></a></p></td>
-<td><p>Pandas head and tail in one command, with optional rounding.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/mspu.pandas.df_diffs.html#mspu.pandas.df_diffs" title="mspu.pandas.df_diffs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">df_diffs</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/mspu.pandas.df_diffs.html#mspu.pandas.df_diffs" title="mspu.pandas.df_diffs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">df_diffs</span></code></a></p></td>
 <td><p>Get rows in two dfs that are different to each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/mspu.pandas.create_empty_df.html#mspu.pandas.create_empty_df" title="mspu.pandas.create_empty_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_empty_df</span></code></a></p></td>
+<td><p>Create an empty df with specified index and column types.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/mspu.pandas.explode_date_range.html#mspu.pandas.explode_date_range" title="mspu.pandas.explode_date_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">explode_date_range</span></code></a></p></td>
 <td><p>Explode DataFrame start/end date columns to date column.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/mspu.pandas.pa_mod.html#mspu.pandas.pa_mod" title="mspu.pandas.pa_mod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pa_mod</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/mspu.pandas.explode_int_range.html#mspu.pandas.explode_int_range" title="mspu.pandas.explode_int_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">explode_int_range</span></code></a></p></td>
+<td><p>Explodes a DataFrame with integer ranges into individual rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/mspu.pandas.pa_mod.html#mspu.pandas.pa_mod" title="mspu.pandas.pa_mod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pa_mod</span></code></a></p></td>
 <td><p>Calculates remainder after division by a positive divisor.</p></td>
 </tr>
 </tbody>
@@ -437,11 +458,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="api/mspu.pandas.pd_ht.html"
+       href="api/mspu.pandas.PdHt.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">mspu.pandas.pd_ht</p>
+        <p class="prev-next-title">mspu.pandas.PdHt</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

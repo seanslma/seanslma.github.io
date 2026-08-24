@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mspu.polars.utils &#8212; mspu 0.0.1 documentation</title>
+    <title>mspu.polars.utils &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=5aa371e9"></script>
+    <script src="../../../_static/documentation_options.js?v=f7f30125"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -113,7 +113,7 @@
   
   
   
-    <p class="title logo__title">mspu 0.0.1 documentation</p>
+    <p class="title logo__title">mspu 0.0.2 documentation</p>
   
 </a></div>
     
@@ -367,73 +367,126 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
 
-<div class="viewcode-block" id="pl_ht">
-<a class="viewcode-back" href="../../../api/mspu.polars.pl_ht.html#mspu.polars.pl_ht">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">pl_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PlHt">
+<a class="viewcode-back" href="../../../api/mspu.polars.PlHt.html#mspu.polars.PlHt">[docs]</a>
+<span class="nd">@pl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">register_dataframe_namespace</span><span class="p">(</span><span class="s1">&#39;ht&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PlHt</span><span class="p">:</span>
+<div class="viewcode-block" id="PlHt.__init__">
+<a class="viewcode-back" href="../../../api/mspu.polars.PlHt.html#mspu.polars.PlHt.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="PlHt.__call__">
+<a class="viewcode-back" href="../../../api/mspu.polars.PlHt.html#mspu.polars.PlHt.__call__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">c</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">cw</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Polars head and tail in one command `ht`, with optional rounding.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n : int</span>
+<span class="sd">            Number of rows to show from the head and tail. If n &lt; 0 or n is greater than</span>
+<span class="sd">            half the number of rows, the entire DataFrame will be shown.</span>
+<span class="sd">        c : int</span>
+<span class="sd">            Number of columns to show. If None or greater than the number of columns,</span>
+<span class="sd">            all columns will be shown.</span>
+<span class="sd">        w : int</span>
+<span class="sd">            Width of the output in characters. If None, the width will be determined.</span>
+<span class="sd">        cw : int</span>
+<span class="sd">            Column width in characters. If None, the column width will be determined.</span>
+<span class="sd">        r : int</span>
+<span class="sd">            Number of decimal places to round float and decimal columns. If None or negative,</span>
+<span class="sd">            no rounding will be applied.</span>
+<span class="sd">        t : bool</span>
+<span class="sd">            If True, transpose the DataFrame before displaying.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import polars as pl</span>
+<span class="sd">        &gt;&gt;&gt; import mspu.polars # register `PlHt` as Polars DataFrame namespace `ht`</span>
+<span class="sd">        &gt;&gt;&gt; df = pl.DataFrame({</span>
+<span class="sd">        ...   &#39;foo&#39;: [1.12345, 2.98765, 3.14159],</span>
+<span class="sd">        ...   &#39;bar&#39;: [7, 8, 9],</span>
+<span class="sd">        ...   &#39;ham&#39;: [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; df.ht(n=1, c=2, r=2)</span>
+<span class="sd">        shape: (3, 3)</span>
+<span class="sd">        ┌──────┬───┬─────┐</span>
+<span class="sd">        │ foo  ┆ … ┆ ham │</span>
+<span class="sd">        │ ---  ┆   ┆ --- │</span>
+<span class="sd">        │ f64  ┆   ┆ str │</span>
+<span class="sd">        ╞══════╪═══╪═════╡</span>
+<span class="sd">        │ 1.12 ┆ … ┆ x   │</span>
+<span class="sd">        │ 3.14 ┆ … ┆ z   │</span>
+<span class="sd">        └──────┴───┴─────┘</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">with_row_index</span><span class="p">(</span><span class="s1">&#39;ri_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+                <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;ri_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">String</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">dt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">dt</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dt</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">dt</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]])</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">((</span><span class="n">cs</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">decimal</span><span class="p">())</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">with</span> <span class="n">pl</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+            <span class="n">tbl_hide_dataframe_shape</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">tbl_width_chars</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
+            <span class="n">tbl_rows</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+            <span class="n">tbl_cols</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+            <span class="n">fmt_str_lengths</span><span class="o">=</span><span class="n">cw</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">shape</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: (</span><span class="si">{</span><span class="n">nc</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">nr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="n">df</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span>
+                        <span class="n">include_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">header_name</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span>
+                        <span class="n">column_names</span><span class="o">=</span><span class="s1">&#39;ri_&#39;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">parquet_to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Polars head and tail in one command, with optional rounding.</span>
+<span class="sd">    Read parquet and save as csv.</span>
+
+<span class="sd">    The output path is the input path with its extension replaced by ``.csv``,</span>
+<span class="sd">    so both ``.parquet`` and shorter variants like ``.pq`` work correctly.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    n : int</span>
-<span class="sd">        Number of rows to show from the head and tail. If n &lt; 0 or n is greater than</span>
-<span class="sd">        half the number of rows, the entire DataFrame will be shown.</span>
-<span class="sd">    c : int</span>
-<span class="sd">        Number of columns to show. If None or greater than the number of columns,</span>
-<span class="sd">        all columns will be shown.</span>
-<span class="sd">    w : int</span>
-<span class="sd">        Width of the output in characters. If None, the width will be determined.</span>
-<span class="sd">    r : int</span>
-<span class="sd">        Number of decimal places to round float and decimal columns. If None or negative,</span>
-<span class="sd">        no rounding will be applied.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; import polars as pl</span>
-<span class="sd">    &gt;&gt;&gt; from mspu.polars.utils import pl_ht</span>
-<span class="sd">    &gt;&gt;&gt; pl.DataFrame.ht = pl_ht</span>
-<span class="sd">    &gt;&gt;&gt; df = pl.DataFrame({</span>
-<span class="sd">    ...   &#39;foo&#39;: [1.12345, 2.98765, 3.14159],</span>
-<span class="sd">    ...   &#39;bar&#39;: [7, 8, 9],</span>
-<span class="sd">    ...   &#39;ham&#39;: [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],</span>
-<span class="sd">    ... })</span>
-<span class="sd">    &gt;&gt;&gt; df.ht(n=1, c=2, r=2)</span>
-<span class="sd">    shape: (3, 3)</span>
-<span class="sd">    ┌──────┬───┬─────┐</span>
-<span class="sd">    │ foo  ┆ … ┆ ham │</span>
-<span class="sd">    │ ---  ┆   ┆ --- │</span>
-<span class="sd">    │ f64  ┆   ┆ str │</span>
-<span class="sd">    ╞══════╪═══╪═════╡</span>
-<span class="sd">    │ 1.12 ┆ … ┆ x   │</span>
-<span class="sd">    │ 3.14 ┆ … ┆ z   │</span>
-<span class="sd">    └──────┴───┴─────┘</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Path to the input parquet file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]])</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">((</span><span class="n">cs</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">decimal</span><span class="p">())</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
-    <span class="k">with</span> <span class="n">pl</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
-        <span class="n">tbl_hide_dataframe_shape</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">tbl_width_chars</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
-        <span class="n">tbl_rows</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="n">tbl_cols</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></div>
-
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">parquet_to_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Read parquet and save as csv.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">filepath_csv</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filepath</span><span class="p">[:</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span><span class="si">}</span><span class="s1">csv&#39;</span>
+    <span class="n">filepath_csv</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
     <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">filepath_csv</span><span class="p">)</span>
 
 
@@ -458,13 +511,61 @@
 
 <div class="viewcode-block" id="to_float32_polars_df">
 <a class="viewcode-back" href="../../../api/mspu.polars.to_float32_polars_df.html#mspu.polars.to_float32_polars_df">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">to_float32_polars_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_float32_polars_df</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">convert_int_cols</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert all numerical columns type to float32.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">((</span><span class="n">cs</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">decimal</span><span class="p">())</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Float32</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">df</span></div>
+<span class="sd">    Convert float and decimal columns to float32 to reduce memory usage.</span>
 
+<span class="sd">    Integer columns are left untouched unless ``convert_int_cols`` is True,</span>
+<span class="sd">    since converting ints to floats can lose precision for large values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pl.DataFrame</span>
+<span class="sd">        Input DataFrame.</span>
+<span class="sd">    convert_int_cols : bool, default False</span>
+<span class="sd">        Whether to also convert integer columns to float32.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame</span>
+<span class="sd">        DataFrame with float/decimal columns cast to float32.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">convert_int_cols</span><span class="p">:</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">numeric</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">decimal</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">cols</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Float32</span><span class="p">))</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_count_vals</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">out_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count special values (infinite, NaN) in a DataFrame.</span>
+
+<span class="sd">    Every column is kept; columns whose dtype does not support</span>
+<span class="sd">    ``is_infinite``/``is_nan`` (i.e. non-float/decimal) get a count of 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;col&#39;</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">out_col</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">UInt32</span><span class="p">})</span>
+    <span class="n">exprs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="n">is_float</span><span class="p">()</span> <span class="ow">or</span> <span class="n">dtype</span><span class="o">.</span><span class="n">is_decimal</span><span class="p">():</span>
+            <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col</span><span class="p">),</span> <span class="n">method</span><span class="p">)()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">exprs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">UInt32</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">exprs</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">unpivot</span><span class="p">(</span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="n">out_col</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">out_col</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
 
 
 <div class="viewcode-block" id="inf_count">
@@ -473,16 +574,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Counts the number of infinite values in each column of a Polars DataFrame.</span>
 
-<span class="sd">    Returns a new DataFrame with the column names and their corresponding counts,</span>
-<span class="sd">    sorted in descending order.</span>
+<span class="sd">    Columns whose dtype does not support infinite values (non-float/decimal)</span>
+<span class="sd">    are kept with a count of 0. Returns a new DataFrame with the column names</span>
+<span class="sd">    and their corresponding counts, sorted in descending order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df_inf</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">([(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">is_infinite</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
-        <span class="o">.</span><span class="n">unpivot</span><span class="p">(</span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;inf_cnt&#39;</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;inf_cnt&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;inf_cnt&#39;</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">df_inf</span></div>
+    <span class="k">return</span> <span class="n">_count_vals</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;is_infinite&#39;</span><span class="p">,</span> <span class="s1">&#39;inf_cnt&#39;</span><span class="p">)</span></div>
 
 
 
@@ -492,16 +588,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Counts the number of NaN values in each column of a Polars DataFrame.</span>
 
-<span class="sd">    Returns a new DataFrame with the column names and their corresponding counts,</span>
-<span class="sd">    sorted in descending order.</span>
+<span class="sd">    Columns whose dtype does not support NaN (non-float/decimal) are kept</span>
+<span class="sd">    with a count of 0. Returns a new DataFrame with the column names and</span>
+<span class="sd">    their corresponding counts, sorted in descending order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df_nan</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">([(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">is_nan</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">col</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
-        <span class="o">.</span><span class="n">unpivot</span><span class="p">(</span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;nan_cnt&#39;</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;nan_cnt&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;nan_cnt&#39;</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">df_nan</span></div>
+    <span class="k">return</span> <span class="n">_count_vals</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;is_nan&#39;</span><span class="p">,</span> <span class="s1">&#39;nan_cnt&#39;</span><span class="p">)</span></div>
 
 
 

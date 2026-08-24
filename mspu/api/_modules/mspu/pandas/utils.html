@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mspu.pandas.utils &#8212; mspu 0.0.1 documentation</title>
+    <title>mspu.pandas.utils &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=5aa371e9"></script>
+    <script src="../../../_static/documentation_options.js?v=f7f30125"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -113,7 +113,7 @@
   
   
   
-    <p class="title logo__title">mspu 0.0.1 documentation</p>
+    <p class="title logo__title">mspu 0.0.2 documentation</p>
   
 </a></div>
     
@@ -362,90 +362,282 @@
                 <article class="bd-article">
                   
   <h1>Source code for mspu.pandas.utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
 
 
-<div class="viewcode-block" id="pd_ht">
-<a class="viewcode-back" href="../../../api/mspu.pandas.pd_ht.html#mspu.pandas.pd_ht">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">pd_ht</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PdHt">
+<a class="viewcode-back" href="../../../api/mspu.pandas.PdHt.html#mspu.pandas.PdHt">[docs]</a>
+<span class="nd">@pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">register_dataframe_accessor</span><span class="p">(</span><span class="s1">&#39;ht&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PdHt</span><span class="p">:</span>
+<div class="viewcode-block" id="PdHt.__init__">
+<a class="viewcode-back" href="../../../api/mspu.pandas.PdHt.html#mspu.pandas.PdHt.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pandas_obj</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span> <span class="o">=</span> <span class="n">pandas_obj</span></div>
+
+
+<div class="viewcode-block" id="PdHt.__call__">
+<a class="viewcode-back" href="../../../api/mspu.pandas.PdHt.html#mspu.pandas.PdHt.__call__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">c</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">cw</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pandas head and tail in one command `ht`, with optional rounding.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n : int</span>
+<span class="sd">            Number of rows to show from the head and tail. If n &lt; 0 or n is greater than</span>
+<span class="sd">            half the number of rows, the entire DataFrame will be shown.</span>
+<span class="sd">        c : int</span>
+<span class="sd">            Number of columns to show. If None or greater than the number of columns,</span>
+<span class="sd">            all columns will be shown.</span>
+<span class="sd">        w : int</span>
+<span class="sd">            Display width in characters. If None, pandas default is used.</span>
+<span class="sd">        cw : int</span>
+<span class="sd">            Column width in characters. If None, pandas default is used.</span>
+<span class="sd">        r : int</span>
+<span class="sd">            Number of decimal places to round float columns. If None or negative,</span>
+<span class="sd">            no rounding will be applied.</span>
+<span class="sd">        t : bool</span>
+<span class="sd">            If True, transpose the DataFrame before displaying.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; import mspu.pandas # register `PdHt` as pandas DataFame accessor `ht`</span>
+<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame({</span>
+<span class="sd">        ...     &#39;foo&#39;: [1.12345, 2.98765, 3.14159],</span>
+<span class="sd">        ...     &#39;bar&#39;: [7, 8, 9],</span>
+<span class="sd">        ...     &#39;ham&#39;: [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; df.ht(n=1, c=2, r=2)</span>
+<span class="sd">        shape: (3, 3)</span>
+<span class="sd">            foo  ...  ham</span>
+<span class="sd">        0  1.12  ...    x</span>
+<span class="sd">        2  3.14  ...    z</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Columns to show</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Display width</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="mi">1000</span>
+
+        <span class="c1"># Slice head + tail (or full df)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]])</span>
+
+        <span class="c1"># Round float columns</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">float_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">float_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">float_cols</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">c</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span>
+            <span class="s1">&#39;display.show_dimensions&#39;</span><span class="p">,</span>
+            <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;display.width&#39;</span><span class="p">,</span>
+            <span class="n">w</span><span class="p">,</span>
+            <span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">,</span>
+            <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span>
+            <span class="n">c</span><span class="p">,</span>
+            <span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span>
+            <span class="n">cw</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">shape</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: (</span><span class="si">{</span><span class="n">nc</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">nr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="create_empty_df">
+<a class="viewcode-back" href="../../../api/mspu.pandas.create_empty_df.html#mspu.pandas.create_empty_df">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_empty_df</span><span class="p">(</span>
+    <span class="n">col_types</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">ind_types</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Pandas head and tail in one command, with optional rounding.</span>
+<span class="sd">    Create an empty df with specified index and column types.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    n : int</span>
-<span class="sd">        Number of rows to show from the head and tail. If n &lt; 0 or n is greater than</span>
-<span class="sd">        half the number of rows, the entire DataFrame will be shown.</span>
-<span class="sd">    c : int</span>
-<span class="sd">        Number of columns to show. If None or greater than the number of columns,</span>
-<span class="sd">        all columns will be shown.</span>
-<span class="sd">    w : int</span>
-<span class="sd">        Display width in characters. If None, pandas default is used.</span>
-<span class="sd">    r : int</span>
-<span class="sd">        Number of decimal places to round float columns. If None or negative,</span>
-<span class="sd">        no rounding will be applied.</span>
+<span class="sd">    col_types : dict[str, str]</span>
+<span class="sd">        Column name and type.</span>
+<span class="sd">    ind_types : dict[str, str], optional</span>
+<span class="sd">        Index level name and type.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    None</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        An empty DataFrame with the specified index and column types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ind_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ind_types</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">{</span><span class="o">**</span><span class="n">ind_types</span><span class="p">,</span> <span class="o">**</span><span class="n">col_types</span><span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">ind_types</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ind_types</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="explode_int_range">
+<a class="viewcode-back" href="../../../api/mspu.pandas.explode_int_range.html#mspu.pandas.explode_int_range">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">explode_int_range</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">start_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">end_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inclusive</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;neither&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
+    <span class="n">drop_range_cols</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Explodes a DataFrame with integer ranges into individual rows.</span>
+
+<span class="sd">    Index is ignored, and a new index is created.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        The input DataFrame containing the integer ranges.</span>
+<span class="sd">    start_col : str</span>
+<span class="sd">        The name of the column representing the start of the range.</span>
+<span class="sd">    end_col : str</span>
+<span class="sd">        The name of the column representing the end of the range.</span>
+<span class="sd">    col : str</span>
+<span class="sd">        The name of the new column that will contain the exploded values.</span>
+<span class="sd">    step : int, optional</span>
+<span class="sd">        The step size for the range. Default is 1.</span>
+<span class="sd">    min_val : int, optional</span>
+<span class="sd">        The minimum value to limit the start of the range. If None, no limit is applied.</span>
+<span class="sd">    max_val : int, optional</span>
+<span class="sd">        The maximum value to limit the end of the range. If None, no limit is applied.</span>
+<span class="sd">    inclusive : {&#39;both&#39;, &#39;left&#39;, &#39;right&#39;, &#39;neither&#39;}, optional</span>
+<span class="sd">        Specifies whether to include the start and/or end values in the exploded range.</span>
+<span class="sd">        Default is &#39;both&#39;.</span>
+<span class="sd">    drop_range_cols : bool, optional</span>
+<span class="sd">        Whether to drop the start_col and end_col from the resulting DataFrame.</span>
+<span class="sd">        Default is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        A new DataFrame with the exploded integer ranges.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
-<span class="sd">    &gt;&gt;&gt; from mspu.pandas.utils import pd_ht</span>
-<span class="sd">    &gt;&gt;&gt; pd.DataFrame.ht = pd_ht</span>
+<span class="sd">    &gt;&gt;&gt; from mspu.pandas import explode_int_range</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({</span>
-<span class="sd">    ...     &#39;foo&#39;: [1.12345, 2.98765, 3.14159],</span>
-<span class="sd">    ...     &#39;bar&#39;: [7, 8, 9],</span>
-<span class="sd">    ...     &#39;ham&#39;: [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],</span>
+<span class="sd">    ...     &#39;project&#39;: [&#39;a&#39;, &#39;b&#39;],</span>
+<span class="sd">    ...     &#39;start_year&#39;: [2024, 2026],</span>
+<span class="sd">    ...     &#39;end_year&#39;: [2025, 2029],</span>
 <span class="sd">    ... })</span>
-<span class="sd">    &gt;&gt;&gt; df.ht(n=1, c=2, r=2)</span>
-<span class="sd">    shape: (3, 3)</span>
-<span class="sd">        foo  ...  ham</span>
-<span class="sd">    0  1.12  ...    x</span>
-<span class="sd">    2  3.14  ...    z</span>
+<span class="sd">    &gt;&gt;&gt; d1 = explode_int_range(</span>
+<span class="sd">    ...     df=df,</span>
+<span class="sd">    ...     start_col=&#39;start_year&#39;,</span>
+<span class="sd">    ...     end_col=&#39;end_year&#39;,</span>
+<span class="sd">    ...     col=&#39;year&#39;,</span>
+<span class="sd">    ...     inclusive=&#39;left&#39;,</span>
+<span class="sd">    ...     max_val=2028,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; d1.ht(-1)</span>
+<span class="sd">    shape: (3, 2)</span>
+<span class="sd">    project  year</span>
+<span class="sd">    0       a  2024</span>
+<span class="sd">    1       b  2026</span>
+<span class="sd">    1       b  2027</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Columns to show</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="c1"># Display width</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="mi">1000</span>
-
-    <span class="c1"># Slice head + tail (or full df)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">create_empty_df</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]])</span>
+        <span class="c1"># limit start_value and replace null with min_val</span>
+        <span class="k">if</span> <span class="n">min_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">start_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">start_col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">min_val</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">start_col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">min_val</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="c1"># limit end_value and replace null with max_val</span>
+        <span class="k">if</span> <span class="n">max_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">end_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">end_col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">max_val</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">end_col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span>
+            <span class="p">)</span>
 
-    <span class="c1"># Round float columns</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">float_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">float_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">float_cols</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="c1"># handle inclusive parameter</span>
+        <span class="n">start_offset</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">inclusive</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">]:</span>
+            <span class="n">start_offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">inclusive</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">]:</span>
+            <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span>
-        <span class="s1">&#39;display.show_dimensions&#39;</span><span class="p">,</span>
-        <span class="kc">False</span><span class="p">,</span>
-        <span class="s1">&#39;display.width&#39;</span><span class="p">,</span>
-        <span class="n">w</span><span class="p">,</span>
-        <span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-        <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span>
-        <span class="n">c</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></div>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                    <span class="p">{</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">start_offset</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="n">end_offset</span><span class="p">,</span> <span class="n">step</span><span class="p">)}</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">start_col</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">end_col</span><span class="p">]))</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># drop start_col and end_col</span>
+    <span class="k">if</span> <span class="n">drop_range_cols</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">start_col</span><span class="p">,</span> <span class="n">end_col</span><span class="p">])</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">v</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">df</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">remove_cols_utc</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts datetime columns in UTC to timezone-naive (tz=None).</span>
+
+<span class="sd">    Only columns whose timezone offset is exactly UTC are converted, so</span>
+<span class="sd">    columns with fixed offsets like ``+02:00`` are left untouched.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;datetimetz&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="n">tz</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz</span>
-        <span class="k">if</span> <span class="n">tz</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;utc&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">tz</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">tz</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tz</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
             <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 

@@ -5,6 +5,8 @@ categories: ["Python", "Pandas", "Performance"]
 
 # Explode date ranges in a pandas DataFrame 30x faster
 
+Update 2026–07–14: Both the `gen_rand_df` and `explode_date_range` functions are now available from the `mspu` python package. See the [document](https://seanslma.github.io/mspu/api/mspu.html) for more details.
+
 During data analysis, it is very common that we need to convert our data to the interval resolution from a lower time resolution such as quarterly or monthly to half hourly data.
 
 We can do the conversion easily in Python using pandas. However, we know that the pandas `df.explode` function is very slow. Here I will show how we can make this process **30x** faster without using another Python package.

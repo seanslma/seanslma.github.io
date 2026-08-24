@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mspu.pandas.datetime &#8212; mspu 0.0.1 documentation</title>
+    <title>mspu.pandas.datetime &#8212; mspu 0.0.2 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=5aa371e9"></script>
+    <script src="../../../_static/documentation_options.js?v=f7f30125"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -113,7 +113,7 @@
   
   
   
-    <p class="title logo__title">mspu 0.0.1 documentation</p>
+    <p class="title logo__title">mspu 0.0.2 documentation</p>
   
 </a></div>
     
@@ -420,7 +420,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pl.DataFrame</span>
+<span class="sd">    pd.DataFrame</span>
 <span class="sd">        The DataFrame same as the input but with</span>
 <span class="sd">        start/end date columns replaced by the new date column</span>
 
@@ -511,72 +511,9 @@
             <span class="n">levels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">date_col</span><span class="p">]</span>
             <span class="n">levels_old</span> <span class="o">+=</span> <span class="p">[</span><span class="n">date_col</span><span class="p">]</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="n">drop_index</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="n">start_date_col</span><span class="p">:</span> <span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">,</span>
-            <span class="n">end_date_col</span><span class="p">:</span> <span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="c1"># offset start date</span>
-    <span class="k">if</span> <span class="n">start_date_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">start_date_offset</span>
-
-    <span class="c1"># roll start date</span>
-    <span class="k">if</span> <span class="n">start_date_roll</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">roll_freq</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span> <span class="k">else</span> <span class="n">freq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">extra_period</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">start_date_roll</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="n">roll_freq</span><span class="p">)</span> <span class="o">+</span> <span class="n">extra_period</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">start_time</span>
-
-    <span class="c1"># limit start_date and replace null with min_date</span>
-    <span class="k">if</span> <span class="n">min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">min_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">min_date</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span>
-            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">min_date</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">min_date</span><span class="p">,</span> <span class="n">min_date</span><span class="p">)</span>
-        <span class="p">)</span>
-
-    <span class="c1"># offset end date</span>
-    <span class="k">if</span> <span class="n">end_date_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">end_date_offset</span>
-
-    <span class="c1"># roll end date</span>
-    <span class="k">if</span> <span class="n">end_date_roll</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">roll_freq</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span> <span class="k">else</span> <span class="n">freq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">extra_period</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">end_date_roll</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="n">roll_freq</span><span class="p">)</span> <span class="o">+</span> <span class="n">extra_period</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">start_time</span>
-
-    <span class="c1"># limit end_date and replace null with max_date</span>
-    <span class="k">if</span> <span class="n">max_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">max_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">max_date</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span>
-            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">max_date</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_date</span><span class="p">,</span> <span class="n">max_date</span><span class="p">)</span>
-        <span class="p">)</span>
-
-    <span class="c1"># FIXME: special regarding pandas version</span>
-    <span class="n">pd_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">pd_version</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="n">inclusive_par</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;inclusive&#39;</span><span class="p">:</span> <span class="n">inclusive</span><span class="p">}</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;neither&#39;</span><span class="p">:</span>
-            <span class="n">inclusive</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">-=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">inclusive_par</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;closed&#39;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;both&#39;</span> <span class="k">else</span> <span class="n">inclusive</span><span class="p">}</span>
-
-    <span class="c1"># if inclusive = &#39;left&#39; we expect date_end is exclusive</span>
-    <span class="c1">#   so records with start_date == end_date should be excluded</span>
-    <span class="c1"># also reset index to ensure index start from 0 and is consecutive</span>
-    <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">start_date_col</span><span class="si">}</span><span class="s1"> &lt; </span><span class="si">{</span><span class="n">end_date_col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">start_date_col</span><span class="si">}</span><span class="s1"> &lt;= </span><span class="si">{</span><span class="n">end_date_col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="n">drop_index</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">])</span>
 
     <span class="c1"># get exploded timestamp column</span>
     <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
@@ -584,13 +521,73 @@
             <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
                 <span class="p">{</span>
                     <span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">),</span>
-                    <span class="n">date_col</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">),</span>
+                    <span class="n">date_col</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[us]&#39;</span><span class="p">),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
             <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># offset start date</span>
+        <span class="k">if</span> <span class="n">start_date_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">start_date_offset</span>
+
+        <span class="c1"># roll start date</span>
+        <span class="k">if</span> <span class="n">start_date_roll</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">roll_freq</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span> <span class="k">else</span> <span class="n">freq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">extra_period</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">start_date_roll</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="n">roll_freq</span><span class="p">)</span> <span class="o">+</span> <span class="n">extra_period</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">start_time</span>
+
+        <span class="c1"># limit start_date and replace null with min_date</span>
+        <span class="k">if</span> <span class="n">min_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">min_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">min_date</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span>
+                <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">min_date</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">start_date_col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">min_date</span><span class="p">,</span> <span class="n">min_date</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># offset end date</span>
+        <span class="k">if</span> <span class="n">end_date_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">end_date_offset</span>
+
+        <span class="c1"># roll end date</span>
+        <span class="k">if</span> <span class="n">end_date_roll</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">roll_freq</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span> <span class="k">else</span> <span class="n">freq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">extra_period</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">end_date_roll</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="n">roll_freq</span><span class="p">)</span> <span class="o">+</span> <span class="n">extra_period</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">start_time</span>
+
+        <span class="c1"># limit end_date and replace null with max_date</span>
+        <span class="k">if</span> <span class="n">max_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">max_date</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span>
+                <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">max_date</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_date</span><span class="p">,</span> <span class="n">max_date</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># FIXME: special regarding pandas version</span>
+        <span class="n">pd_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">pd_version</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">inclusive_par</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;inclusive&#39;</span><span class="p">:</span> <span class="n">inclusive</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;neither&#39;</span><span class="p">:</span>
+                <span class="n">inclusive</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">end_date_col</span><span class="p">]</span> <span class="o">-=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">inclusive_par</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;closed&#39;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;both&#39;</span> <span class="k">else</span> <span class="n">inclusive</span><span class="p">}</span>
+
+        <span class="c1"># if inclusive = &#39;left&#39; we expect date_end is exclusive</span>
+        <span class="c1">#   so records with start_date == end_date should be excluded</span>
+        <span class="c1"># also reset index to ensure index start from 0 and is consecutive</span>
+        <span class="k">if</span> <span class="n">inclusive</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">start_date_col</span><span class="si">}</span><span class="s1"> &lt; </span><span class="si">{</span><span class="n">end_date_col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">start_date_col</span><span class="si">}</span><span class="s1"> &lt;= </span><span class="si">{</span><span class="n">end_date_col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
                 <span class="p">[</span>
